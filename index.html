@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+
+	<title>Page d'accueil</title>
+
+   <link rel="stylesheet" href="style.css" />
+   
+</head>
+
+
+
+
+
+<body>
+
+<p style="text-align:center;"><img src="Logo.png"/></p>
+
+
+
+    <div id="login">
+
+        <form action="connexion.php" method="post">
+            
+            <fieldset class="clearfix">
+                
+                <p></span><input type="text" value="Login" name="login" onBlur="if(this.value == '') this.value = 'Login'" onFocus="if(this.value == 'Login') this.value = ''" required></p> 
+                <p></span><input class="mdp" type="password" value="Mot de passe" name="mdp" onBlur="if(this.value == '') this.value = 'Mot de passe'" onFocus="if(this.value == 'Mot de passe') this.value = ''" required></p> 
+                <p><input type="submit" value="Connexion"></p>
+            </fieldset>
+
+        </form>
+
+     	<form action="inscription.php" method="post">
+            <fieldset class="clearfix">
+            
+               <p><input type="submit" value="Inscription"></p>
+            </fieldset>
+        </form>
+        
+    </div> <!-- end login -->
+
+ 
+ 
+ </body>
+</html>
