@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head>
         <title>Reseau Social</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<link rel="stylesheet" href="/~flucia/geekbook/jquery-ui-1.10.2.custom/development-bundle/themes/flick/jquery.ui.all.css" />
 	
@@ -94,6 +94,34 @@
 		
 		function ouvrirCommentaire(obj){
 			$(obj).next("#comment_table").toggle();
+		}	
+
+		function find_people(){				 
+			 var search = $("#search_bar_input").val();
+			 var data = { search : search };			
+			     $.ajax({
+				url: "recherche_personne.php",
+				data : data,
+				complete : function(xhr, result){
+					if(result != "success") return; 
+					var response = xhr.responseText;
+					$("#search_bar ul").empty();
+					$(response).appendTo("#search_bar ul");
+					$("#search_bar ul").show();
+					
+				}
+			  });	 
+		}
+		
+		function friend_request_popup(){
+			 $.ajax({
+				url: "friend_request_popup.php",
+				complete : function(xhr, result){
+					if(result != "success") return; 
+					var response = xhr.responseText;
+					$(response).appendTo("html");					
+				}
+			  });	
 		}
 		
 		//-->
@@ -126,7 +154,7 @@
 					}
 				});
 				
-			});				
+			});			
 		
 		//-->
 		</script>
@@ -140,7 +168,12 @@
 				<tr>
 					<td id="info_perso">
 					photo
-					<a href="../modifPerso.php">Modifications</a>
+					<br/>
+					<?php
+						if($_SESSION["id"] != $_GET["id"]){// A refaire
+								   echo '<input type="button" value="Ajouter..." onclick="javascript:friend_request_popup();" />';
+						}
+					?>
 					</td>
 					<td rowspan="3" id="mur"> 
 						<div id="post_box">
@@ -149,7 +182,7 @@
 									<li><a href="#tab1"><strong>Status</strong></a></li>
 									<li><a href="#tab2"><strong>Photo</strong></a></li>	
 									<li><a href="#tab3"><strong>Lieu</strong></a></li>
-									<li><a href="#tab4"><strong>Evènement</strong></a></li>
+									<li><a href="#tab4"><strong>Ev&#232;nement</strong></a></li>
 								</ul>
 								<div id="tab1">
 									<table id="post_border" >

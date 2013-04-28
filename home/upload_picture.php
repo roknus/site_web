@@ -16,7 +16,7 @@ if( isset($_POST['picture_title_input']) AND ($_POST['picture_title_input'] != "
 
     if( !is_uploaded_file($tmp_file) )
     {
-        header('Location:index.php');
+        header('Location:./?id='.$_POST["wall"]);
     }
 
     // on vérifie maintenant l'extension
@@ -24,7 +24,7 @@ if( isset($_POST['picture_title_input']) AND ($_POST['picture_title_input'] != "
 
     if( !strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png'))
     {
-	header('Location:index.php');
+	header('Location:./?id='.$_POST["wall"]);
     }
 
     // on copie le fichier dans le dossier de destination
@@ -34,14 +34,14 @@ if( isset($_POST['picture_title_input']) AND ($_POST['picture_title_input'] != "
 
     if( !move_uploaded_file($tmp_file, $content_dir.$name_file.'.'.$type) )
     {
-	header('Location:index.php');
+	header('Location:./?id='.$_POST["wall"]);
     }
 	
 	addPicture('1',$_FILES['uploaded_picture']['name'],$type,$_POST['picture_title_input']);
 	addPost($_POST['picture_description'],$_POST["wall"],$name_file);	
 	
-	header('Location:index.php');
+	header('Location:./?id='.$_POST["wall"]);
 }
 else{
-	header('Location:index.php');
+	header('Location:./?id='.$_POST["wall"]);
 }

@@ -1,0 +1,16 @@
+<?php
+	session_start();
+	if(isset($_GET["search"]) AND ($_GET["search"] != "")){
+		require_once('connection_db.php');
+		$search = $_GET["search"];
+		$search = htmlspecialchars($search);
+		
+		$db = connect_db();
+		$request = $db->query("SELECT * FROM membre WHERE login LIKE '".$search."%';");
+		$result = "";
+
+		while($data = $request->fetch()){
+			    $result .= '<li>'.$data["login"].'</li>';
+		}
+		echo $result;		
+	}

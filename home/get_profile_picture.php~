@@ -1,0 +1,5 @@
+<?php
+
+	function get_profile_pic_path($id){
+		 $db = connect_db();
+	}

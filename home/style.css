@@ -1,10 +1,15 @@
+html{
+    height:100%;
+    font-family: Helvetica;
+}
+
 body{
 	background-color: #2c3338;
 	font-size: 14px;
 }
 
 #nav{
-	z-index:10000;
+	z-index:100;
 	position:fixed;
 	top: 0px;
 	left: 0px;
@@ -14,8 +19,83 @@ body{
 	border-bottom: 1px outset #2e57a0;
 }
 
+#nav > ul{
+    position:relative;
+    margin-left:-400px;
+    left:50%;
+    margin-top:0px;
+}
+
+#nav ul li{
+    float:left;
+    list-style-type: none;
+}
+
+#nav img{
+    margin-top: 5px;
+}
+
+#search_bar{
+    font-size: 12px;
+    margin-top: 8px;
+    margin-left:5px;
+    width: 450px;
+}
+
+#search_bar input{
+    border-radius:0px;
+    border-color:#2e57a0;
+}
+
+#search_bar li{
+    color:rgb(150,150,150);
+    font-size:12px;
+    clear:left;
+    float: none;
+    position:relative;
+    right:40px;
+    border: 1px solid #2e57a0;
+    border-top: none;
+    background-color:rgb(240,240,255);
+    width: 410px;
+    height: 50px;
+}
+#search_bar li table{
+    border-collapse:collapse;
+}
+#search_bar li table td{
+    padding:0px;
+}
+#search_bar li table td img{
+    margin:1px;
+}
+
+#nav_button{
+    border-collapse:collapse;
+    margin-top:14px;
+}
+
+#nav_button td a{
+    color: rgb(230,230,230);  
+    text-decoration:none;
+    text-transform:capitalize;  
+    font-size:12px;
+}
+
+#nav_button td{
+    height:24px;
+    border-left: 1px solid #4b69a0;
+    border-right: 1px solid #4b69a0;
+    padding-left:15px;
+    padding-right:15px;
+}
+
+#nav_button td:hover{
+    background-color:#4b69a0;
+}
+
 #chat_nav{
-	z-index:10000;
+	z-index:100;
 	position:fixed;
 	bottom: 0px;
 	left: 0px;
@@ -119,7 +199,7 @@ textarea{
 	width: 45px;
 }
 
-.post .post_user_picture{
+.post_user_picture{
 	vertical-align:top;
 }
 
@@ -142,6 +222,7 @@ textarea{
 
 .user_name{
 	color: #2e57a0;
+	text-transform:capitalize;
 }
 
 .comments_button{
@@ -154,7 +235,44 @@ textarea{
 }
 
 .comments td{
+        font-size: 11px;
 	color: rgb(75,75,75);
 	max-width: 325px;
 	background-color:rgb(240,240,255);
+}
+
+.comments .post_time{
+    font-size: 11px;
+}
+
+#add_friend_popup{
+    z-index:101;
+    position: fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background-color: black;
+    opacity:0.5;
+}
+
+#add_friend_window{
+    z-index:102;
+    position:fixed;
+    top:50%;
+    left:50%;
+    margin-left:-200px;
+    margin-top:-150px;
+    height:300px;
+    width:400px;
+    background-color:white;
+    border:1px solid #1a4aa0;
+}
+
+#friend_popup_top{
+    z-index:103;
+    width:100%;
+    height: 30px;    
+    background-color: #2e57a0;
+    border-bottom: 1px outset #2e57a0;
 }
