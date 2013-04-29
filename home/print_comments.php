@@ -11,7 +11,7 @@
 				<tr class="comments">
 					<td class="post_user_picture"><img src="img/'.$data["image_profil"].'.'.$data["type"].'" height="30" width="30" /></td>
 					<td><span class="user_name"><strong>'.$data["login"].'</strong></span> '.$data["content"].'
-					<br/><span class="post_time">il y a '.tempsPost(time()-strtotime($data["creation_time"])).'
+					<br/><span class="post_time">il y a '.tempsPost(time()-strtotime($data["creation_time"])).'</span>
 					</td>
 				</tr>';
 		}

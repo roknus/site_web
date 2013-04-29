@@ -58,16 +58,22 @@ body{
     border-top: none;
     background-color:rgb(240,240,255);
     width: 410px;
-    height: 50px;
+    height: 53px;
 }
 #search_bar li table{
     border-collapse:collapse;
 }
-#search_bar li table td{
+
+.search_bar_result{
+    padding-bottom:2px;
+}
+
+.image_search_bar{
     padding:0px;
 }
 #search_bar li table td img{
-    margin:1px;
+    margin:1px;    
+    border: 1px solid rgb(200,200,200);
 }
 
 #nav_button{
@@ -263,16 +269,52 @@ textarea{
     left:50%;
     margin-left:-200px;
     margin-top:-150px;
-    height:300px;
     width:400px;
     background-color:white;
     border:1px solid #1a4aa0;
 }
 
 #friend_popup_top{
+    color:white;
     z-index:103;
     width:100%;
     height: 30px;    
+    padding-top:10px;
     background-color: #2e57a0;
     border-bottom: 1px outset #2e57a0;
+}
+
+#friend_popup_top span{
+    margin-left:10px;
+    font-size: 15px;
+}
+
+.close_button{
+    position: absolute;
+    right: 10px;
+    cursor:pointer;
+}
+
+#friend_popup_content{
+    padding: 20px;
+}
+
+#friend_popup_content img{
+    border: 1px solid rgb(200,200,200);
+}
+
+#friend_popup_bottom{
+    width:100%;
+    height: 30px;
+    padding-top:3px;
+    background-color: rgb(200,200,200);
+    border-top: 1px outset #2e57a0;
+}
+
+#friend_popup_bottom span{
+    margin-left:225px;
+}
+
+#add_friend_description{
+    border: 1px solid rgb(200,200,200);
 }

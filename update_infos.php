@@ -2,8 +2,8 @@
 
 session_start();
 
-$co=mysql_connect('localhost', 'root', '') or die('erreur connexion');
-$base=mysql_select_db('bdd', $co) or die('bdd incorrecte');
+$co=mysql_connect('localhost', 'root', 'azerty') or die('erreur connexion');
+$base=mysql_select_db('intouch', $co) or die('bdd incorrecte');
  
 
 

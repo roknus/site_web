@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head>
-        <title>Reseau Social</title>
+        <title>inTouch</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<link rel="stylesheet" href="/~flucia/geekbook/jquery-ui-1.10.2.custom/development-bundle/themes/flick/jquery.ui.all.css" />
@@ -114,14 +114,38 @@
 		}
 		
 		function friend_request_popup(){
+			 var id = <?php echo $_GET["id"]; ?>;
+			 var data = { id : id };
 			 $.ajax({
-				url: "friend_request_popup.php",
+				url: "friend_request.php",
+				data : data,
 				complete : function(xhr, result){
 					if(result != "success") return; 
 					var response = xhr.responseText;
-					$(response).appendTo("html");					
+					$(response).appendTo("html");
+					$("#add_friend_description textarea").val("");					
 				}
 			  });	
+		}
+		
+		function remove_friend_popup(){
+			 $("#add_friend_window").remove();
+			 $("#add_friend_popup").remove();
+		}
+
+		function add_friend(){
+			 var message=$("#add_friend_description textarea").val();
+			 var data = {message : message, poster : <?php echo $_SESSION["id"]; ?>, profile : <?php echo $_GET["id"]; ?>};
+			 $.ajax({
+				url: "add_friend.php",
+				data : data,
+				complete : function(xhr, result){
+					if(result != "success") return; 
+					var response = xhr.responseText;
+					remove_friend_popup();				
+				}
+			  });	
+			 
 		}
 		
 		//-->
