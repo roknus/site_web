@@ -1,11 +1,11 @@
 <div id="nav">
      <ul>
 	<li>
-		<table>
+		<table id="notifications">
 			<tr>
-				<td id="friend_notifications"><span id="friend_notifications_button" onclick="javascript:notifications_amis();">Amis</span></td>
-				<td><div>Posts</div></td>
-				<td><div>comments</div></td>
+				<td id="friend_notifications"><button class="button_friends" onclick="javascript:notifications_amis();">1</button></td>
+				<td id="post_notifications"><button class="button_posts" onclick="javascript:notifications_amis();">2</button></td>
+				<td id="comment_notifications"><button class="button_comments" onclick="javascript:notifications_amis();">0</button></td>
 			</tr>
 		</table>
 		<ul id="notifications_list"></ul>

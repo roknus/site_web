@@ -10,13 +10,14 @@
         <title>inTouch</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
-		<link rel="stylesheet" href="/~flucia/geekbook/jquery-ui-1.10.2.custom/development-bundle/themes/flick/jquery.ui.all.css" />
+		<link rel="stylesheet" href="/inTouch/jquery-ui-1.10.2.custom/development-bundle/themes/custom-theme/jquery.ui.all.css" />
 	
 		<script type="text/javascript" src="/inTouch/jquery-1.9.1.min.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.core.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.widget.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.mouse.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.tabs.js"></script>
+		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.button.js"></script>
 		
 		<script type="text/javascript">
 		<!--
@@ -188,6 +189,9 @@
 		
 			$(document).ready(function(){
 				$("#tabs").tabs();
+				$(".button_friends").button({icons:{primary:"ui-icon-person"},text:true});
+				$(".button_posts").button({icons:{primary:"ui-icon-document-b"},text:true});
+				$(".button_comments").button({icons:{primary:"ui-icon-comment"},text:true});
 				$("#publication").val("");
 				$(".comment_post").val("");
 				$(".comment_post").bind('keydown',function(event){
@@ -249,7 +253,7 @@
 										</tr>
 										<tr>
 											<td id="submit_post">
-												<input type="button" value="Publier" onclick="javascript:nouvellePublication()"/>
+												<button onclick="javascript:nouvellePublication()">Publier</button>
 											</td>
 										</tr>
 									</table>

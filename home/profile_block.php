@@ -7,7 +7,7 @@
 
 <table id="friend_table">
 	<tr>
-		<td id="friend_table_title"><strong><?php echo $_SESSION['login'];?></strong></td>
+		<td id="friend_table_title"><strong><?php echo $data['login'];?></strong></td>
 	</tr>
 	<tr>
 		<td>

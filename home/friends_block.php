@@ -8,14 +8,14 @@
 		<td id="friend_table_title"><strong>Amis</strong></td>
 	</tr>
 	<tr>
-		<td id="friend_number">Vous avez ... PAS d'amis AHAHAH</td>
+		<td id="friend_number"><?php echo $request->rowCount(); ?> amis</td>
 	</tr>
 	<tr>
 		<td>
 			<div id="friends">
 			     <?php
 				while($data = $request->fetch()){
-					echo '<img src="img/'.$data["image_profil"].'.'.$data["type"].'" width="50" height="50"/>';
+					echo '<a href="./?id='.$data["id2"].'"><img src="img/'.$data["image_profil"].'.'.$data["type"].'" width="45" height="45" title="'.$data["login"].'"/></a>';
 				}
 			     ?>
 			</div>		
