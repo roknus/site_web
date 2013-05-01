@@ -147,6 +147,36 @@
 			  });	
 			 
 		}
+
+		function notifications_amis(){
+			 if($("#notifications_list").html() == ""){
+			 	var data = { id : <?php echo $_GET["id"]; ?>};
+			 	$.ajax({
+					url: "friend_notifications.php",
+					data : data,
+					complete : function(xhr, result){
+						 if(result != "success") return; 
+						 var response = xhr.responseText;
+						 $(response).appendTo("#notifications_list");							 }
+			  	});
+			}
+			else{
+				$("#notifications_list").empty();	
+			}
+		}
+
+		function friend_notification_accept(id_notif){
+			 var data = { id : id_notif };
+			 $.ajax({
+				url: "friend_notification_accept.php",
+				data : data,
+				complete : function(xhr, result){
+					 if(result != "success") return; 
+					 var response = xhr.responseText;
+					 $(location).attr('href',"./?id=<?php echo $_GET["id"]; ?>");					 
+				 }
+		  	});
+		}
 		
 		//-->
 		</script>
@@ -191,7 +221,7 @@
 			<table id="wrapper">
 				<tr>
 					<td id="info_perso">
-					photo
+					<?php include_once('profile_block.php'); ?>
 					<br/>
 					<?php
 						if($_SESSION["id"] != $_GET["id"]){// A refaire
@@ -259,7 +289,7 @@
 				</tr>
 
 				<tr>
-					<td id="amis">amis</td>
+					<td id="amis"><?php include_once('friends_block.php'); ?></td>
 				</tr>
 
 				<tr>

@@ -1,3 +1,7 @@
+<?php
+   session_start();
+?>
+
 <!doctype html>
 <html lang="en-US">
 <head>
@@ -32,18 +36,17 @@
 		<tr>
 
 			<td>
+            <form enctype="multipart/form-data" method="post" action="home/upload_picture.php?wall=<?php echo $_SESSION['id'] ?>" >
+	      <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+	      <input type="hidden" name="wall" value="<?php echo $_SESSION['id']; ?>" />
+	      <input type="hidden" name="image_profil" value="1" />
+	      <input type="hidden" name="picture_description" value="<?php echo $_SESSION['login']; ?> a changer son image de profil" />
+	      <input type="hidden" name="picture_title_input" value="Image de profil" />
+	      <h2>Image:</h2><input name="uploaded_picture" type="file" size="15"/>
+              <input type="submit" name="Telecharger" value="Envoyer"/>
+	    </form>          
             
-            
-            <form action="upload_pic.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name=\"max_file_size" value="50000">
-            <h2>Image:</h2><input TYPE="file" name="image"><br>
-            <input type="submit" name="Telecharger" value="Envoyer">
-            </form>
-            
-            
-            
-            </td>
-          
+            </td>         
           
 		<form action="update_infos.php" method="post">
 

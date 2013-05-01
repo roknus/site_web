@@ -1,6 +1,16 @@
 <div id="nav">
      <ul>
 	<li>
+		<table>
+			<tr>
+				<td id="friend_notifications"><span id="friend_notifications_button" onclick="javascript:notifications_amis();">Amis</span></td>
+				<td><div>Posts</div></td>
+				<td><div>comments</div></td>
+			</tr>
+		</table>
+		<ul id="notifications_list"></ul>
+	</li>
+	<li>
 		<img src="intouch.png" alt="inTouch logo" width="150" height="30" />
 	</li>
 	<li id="search_bar">

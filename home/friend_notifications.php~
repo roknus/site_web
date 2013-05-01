@@ -1,0 +1,16 @@
+<?php
+	if(isset($_GET["id"]) AND ($_GET["id"] != "")){
+	session_start();
+	require_once('connection_db.php');
+	
+	$db = connect_db();
+	$request = $db->prepare('SELECT * FROM membre,notifications WHERE notifications.id_poster = membre.id AND id_profile = :id;');
+		$request->execute(array(
+		"id"=>$_GET["id"]
+		));
+	$message = "";
+	while($data = $request->fetch()){
+		    $message .= '<li><span class="user_name">'.$data["login"].'<span> vous à ajouter en tant qu&rsquo;amis</li>';
+	}
+	echo $message;	
+}

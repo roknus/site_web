@@ -12,7 +12,6 @@ if( isset($_POST['picture_title_input']) AND ($_POST['picture_title_input'] != "
     $content_dir = 'img/'; // dossier où sera déplacé le fichier
 
     $tmp_file = $_FILES['uploaded_picture']['tmp_name'];
-    echo $tmp_file;
 
     if( !is_uploaded_file($tmp_file) )
     {
@@ -36,9 +35,17 @@ if( isset($_POST['picture_title_input']) AND ($_POST['picture_title_input'] != "
     {
 	header('Location:./?id='.$_POST["wall"]);
     }
-	
 	addPicture('1',$_FILES['uploaded_picture']['name'],$type,$_POST['picture_title_input']);
-	addPost($_POST['picture_description'],$_POST["wall"],$name_file);	
+	addPost($_POST['picture_description'],$_POST["wall"],$name_file);
+	if(isset($_POST["image_profil"]) AND ($_POST["image_profil"] == "1")){
+	
+		$db = connect_db();
+		$request = $db->prepare("UPDATE membre SET image_profil = :img WHERE id = :id;");		
+		$request->execute(array(
+			"img"=>$name_file,
+			"id"=>$_POST["wall"]
+			));			
+	}
 	
 	header('Location:./?id='.$_POST["wall"]);
 }

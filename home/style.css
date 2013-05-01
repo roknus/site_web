@@ -6,6 +6,7 @@ html{
 body{
 	background-color: #2c3338;
 	font-size: 14px;
+	margin-top:50px;
 }
 
 #nav{
@@ -18,10 +19,39 @@ body{
 	background-color: #2e57a0;
 	border-bottom: 1px outset #2e57a0;
 }
+#friend_notifications_button{
+    cursor:pointer;
+}
+
+#notifications_list{
+    width:100px;
+    margin-top:10px;
+}
+
+#notifications_list li{
+    color:black;
+    font-size:12px;
+    clear:left;
+    float: none;
+    position:relative;
+    right:50px;
+    padding-left:10px;
+    border: 1px solid #2e57a0;
+    border-top: none;
+    background-color:rgb(240,240,255);
+    width: 300px;
+    height: 40px;
+}
+
+.notifications_button{
+    color: rgb(150,150,150);
+    text-decoration:underline;
+    cursor:pointer;
+}
 
 #nav > ul{
     position:relative;
-    margin-left:-400px;
+    margin-left:-510px;
     left:50%;
     margin-top:0px;
 }
@@ -130,11 +160,6 @@ body{
 	height: 300px;
 }
 
-#amis{
-	width: 250px;
-	height: 300px;
-}
-
 #mur{
 	width: 600px;
 	border-left: solid 1px rgb(200,200,200);
@@ -148,7 +173,8 @@ body{
 	display:inline-block;
 	padding: 2px;
 	margin-left: 20px;
-	margin-top: 10px;
+	margin-top: 30px;
+	margin-bottom: 10px;
 	border-radius: 2px;
 }
 
@@ -317,4 +343,55 @@ textarea{
 
 #add_friend_description{
     border: 1px solid rgb(200,200,200);
+}
+
+#amis{
+	width: 250px;
+	height: 300px;
+}								
+
+#friend_table{
+    height:400px;
+    border:2px solid rgb(180,180,180);
+    border-collapse:collapse;
+    margin-left:10px;
+    margin-top:20px;
+    background-color:rgb(230,230,255);
+}
+
+#friend_table img{
+    border: 1px solid rgb(200,200,200);
+    margin-top: 4px;
+    margin-left:4px;
+}
+
+#friend_table_title{
+    color:#c84600;
+    text-align:center;
+    width:230px;
+    height:40px;
+    font-size:20px;
+    background-color: #2e57a0;
+    text-transform:capitalize;
+}
+
+#friend_number{
+    color: rgb(150,150,255);
+    font-size:12px;
+    height:20px;
+    padding-left:10px;
+}
+
+#friends{
+    min-height:300px;
+    margin:10px;
+    border:1px solid rgb(200,200,255);
+    background-color:white;
+}
+
+#profile_description{
+    min-height:100px;
+    margin:10px;
+    border:1px solid rgb(200,200,255);
+    background-color:white;
 }

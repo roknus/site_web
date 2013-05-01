@@ -25,7 +25,7 @@ if (isset($_SESSION['login']) && isset($_POST['mdp'])) {
 	// on teste si les variables (mdp, new_pass et new_pass_conf) du formulaire sont déclarées (&& isset($_POST['mail2']) && isset($_POST['nom2']) && isset($_POST['prenom2']) && isset($_POST['sexe2']) && isset($_POST['jour2']) && isset($_POST['mois2']) && isset($_POST['annee2']) && isset($_POST['situation']) )
 	if (isset($_POST['mdp']) && isset($_POST['new_pass']) && isset($_POST['new_pass_conf'])){																
 		// on teste les deux mots de passe
-		if ($_POST['new_pass'] == $_POST['new_pass_conf']) {  
+		if ($_POST['new_pass'] == $_POST['new_pass_conf'] AND ($data["mdp"] == sha1($_POST["mdp"]))) {  
 								
 			if ($_POST['mdp'] != $_POST['new_pass']) {
 

@@ -15,8 +15,14 @@
 
 <body>
 
-<p style="text-align:center;"><img src="Logo.png"/></p>
+<p style="text-align:center;"><img src="images(site)/Logo.png"/></p>
 
+
+		<table class="tborder">
+			<tr>
+				<td class="ttitle" style="text-align:center;"><strong><h1>Bienvenue sur inTouch! Connectez-vous s'il vous plaît :)</h1></strong></td>
+            </tr>
+        </table>
 
 
     <div id="login">
@@ -24,9 +30,11 @@
         <form action="connexion.php" method="post">
             
             <fieldset class="clearfix">
+
+                <p><span><img src="images(site)/Icon-user.png"></span><input type="text" value="Login" name="login" onBlur="if(this.value == '') this.value = 'Login'" onFocus="if(this.value == 'Login') this.value = ''" required></p> 
+                <p><span><img src="images(site)/Icon-key.png"></span><input class="mdp" type="password" value="Mot de passe" name="mdp" onBlur="if(this.value == '') this.value = 'Mot de passe'" onFocus="if(this.value == 'Mot de passe') this.value = ''" required></p> 
+                <p><a href="mdpOublie.php"><h4>Mot de passe oublié?</h4></a></p>
                 
-                <p></span><input type="text" value="Login" name="login" onBlur="if(this.value == '') this.value = 'Login'" onFocus="if(this.value == 'Login') this.value = ''" required></p> 
-                <p></span><input class="mdp" type="password" value="Mot de passe" name="mdp" onBlur="if(this.value == '') this.value = 'Mot de passe'" onFocus="if(this.value == 'Mot de passe') this.value = ''" required></p> 
                 <p><input type="submit" value="Connexion"></p>
             </fieldset>
 
