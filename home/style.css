@@ -243,6 +243,14 @@ textarea{
 	width: 45px;
 }
 
+.post button{
+    font-size: 10px;
+}
+
+.post .comments button{
+    font-size: 9px;
+}
+
 .post_user_picture{
 	vertical-align:top;
 }

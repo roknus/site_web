@@ -66,6 +66,7 @@
 						$("#publication").val("");
 						$(response).hide().prependTo("#mes_publications").slideDown(1000);
 						$(".comment_post").val("");
+						$(".comment_post").unbind('keydown');
 						$(".comment_post").bind('keydown',function(event){
 							if(event.keyCode == 13){
 									 nouveauCommentaire(this);
@@ -154,6 +155,7 @@
 				$(".button_friends").button({icons:{primary:"ui-icon-person"},text:true});
 				$(".button_posts").button({icons:{primary:"ui-icon-document-b"},text:true});
 				$(".button_comments").button({icons:{primary:"ui-icon-comment"},text:true});
+				$(".button_like").button({icons:{primary:"ui-icon-star"},text:true});
 				$("#publication").val("");
 				$(".comment_post").val("");
 				$(".comment_post").bind('keydown',function(event){
