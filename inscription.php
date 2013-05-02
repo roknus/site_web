@@ -42,7 +42,7 @@
 			$base=mysql_select_db('intouch', $co) or die('bdd incorrecte');
 			
 			//la requete pour insérer le nouveau membre
-			$signup = "INSERT into membre (login, mdp, nom, prenom, mail, sexe, jour, mois, annee) VALUES('$login', '$mdp', '$nom', '$prenom', '$mail', '$sexe', $jour, $mois, $annee)";
+			$signup = "INSERT into membre (login, mdp, nom, prenom, mail, sexe, jour, mois, annee, image_profil) VALUES('$login', '$mdp', '$nom', '$prenom', '$mail', '$sexe', $jour, $mois, $annee, 1)";
 			
 			//on regarde si le mail existe déjà dans la BDD
 			$mail_existe = "SELECT mail FROM membre WHERE mail='$mail'";

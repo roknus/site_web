@@ -11,6 +11,14 @@
 	$db = connect_db();
 	$request = $db->prepare('SELECT * FROM membre,pictures WHERE membre.image_profil = pictures.id AND membre.id = :id');
 	$request->execute(array('id'=>$_SESSION["id"]));
+	$notif = $post;
+	if(strlen($notif) > 50){
+		$notif = substr($notif,0,50);
+		$notif .= "...";
+	}
+	if($_SESSION["id"] != $wall){
+	   $db->query('INSERT INTO notifications (type,id_profile,id_poster,content,checked,ancre) VALUES ("2","'.$wall.'","'.$_SESSION["id"].'","'.$notif.'","0","?id='.$wall.'#'.$id.'");');
+	}
 	$data = $request->fetch();
 	echo '<div id="'.$id.'" class="post">
 <table>
@@ -32,7 +40,7 @@
 							il y a un instant
 							<table id="comment_table" style="display:none;">
 								<tr id="comment_input">
-                                   	<td><img src="default.jpg" height="30" width="30"/></td>
+                                   	<td><img src="img/'.$data["image_profil"].'.'.$data["type"].'" height="30" width="30"/></td>
 									<td>
 										<textarea class="comment_post" cols="40" rows="2" style="border: 1px solid rgb(200,200,250);" placeholder="Ecrire un commentaire...">
 										</textarea>

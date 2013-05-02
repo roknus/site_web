@@ -1,5 +1,8 @@
 <?php
 	session_start();
+	if(!(isset($_SESSION["id"]))){
+		header('Location:../');
+	}
 	date_default_timezone_set('Europe/Berlin');
         include_once('connection_db.php');
         include_once('print_posts.php');?>
@@ -77,7 +80,7 @@
 			var commentaire = $(obj).val();
 			var id_post = $(obj).parents("div").attr('id');
 			if(commentaire != ""){
-			  var data = { comment : commentaire, id_post : id_post};
+			  var data = { comment : commentaire, id_post : id_post };
 				$.ajax({
 					url: "nouveau_commentaire.php",
 					data : data,
@@ -96,23 +99,6 @@
 		function ouvrirCommentaire(obj){
 			$(obj).next("#comment_table").toggle();
 		}	
-
-		function find_people(){				 
-			 var search = $("#search_bar_input").val();
-			 var data = { search : search };			
-			     $.ajax({
-				url: "recherche_personne.php",
-				data : data,
-				complete : function(xhr, result){
-					if(result != "success") return; 
-					var response = xhr.responseText;
-					$("#search_bar ul").empty();
-					$(response).appendTo("#search_bar ul");
-					$("#search_bar ul").show();
-					
-				}
-			  });	 
-		}
 		
 		function friend_request_popup(){
 			 var id = <?php echo $_GET["id"]; ?>;
@@ -148,47 +134,23 @@
 			  });	
 			 
 		}
-
-		function notifications_amis(){
-			 if($("#notifications_list").html() == ""){
-			 	var data = { id : <?php echo $_GET["id"]; ?>};
-			 	$.ajax({
-					url: "friend_notifications.php",
-					data : data,
-					complete : function(xhr, result){
-						 if(result != "success") return; 
-						 var response = xhr.responseText;
-						 $(response).appendTo("#notifications_list");							 }
-			  	});
-			}
-			else{
-				$("#notifications_list").empty();	
-			}
-		}
-
-		function friend_notification_accept(id_notif){
-			 var data = { id : id_notif };
-			 $.ajax({
-				url: "friend_notification_accept.php",
-				data : data,
-				complete : function(xhr, result){
-					 if(result != "success") return; 
-					 var response = xhr.responseText;
-					 $(location).attr('href',"./?id=<?php echo $_GET["id"]; ?>");					 
-				 }
-		  	});
-		}
 		
 		//-->
 		</script>
 		
     </head>
     <body>
+		
+		<?php
+			require_once('nav.php');
+		?>
+
 		<script>
 		<!--
 		
 			$(document).ready(function(){
 				$("#tabs").tabs();
+				check_notifications();
 				$(".button_friends").button({icons:{primary:"ui-icon-person"},text:true});
 				$(".button_posts").button({icons:{primary:"ui-icon-document-b"},text:true});
 				$(".button_comments").button({icons:{primary:"ui-icon-comment"},text:true});
@@ -211,15 +173,14 @@
 						$(this).find('#comment_table').hide();
 					}
 				});
+				setInterval(function(){
+							check_notifications();							
+							},1000);
 				
 			});			
 		
 		//-->
 		</script>
-		
-		<?php
-			require_once('nav.php');
-		?>
 		
 		<div id="page">
 			<table id="wrapper">
@@ -293,11 +254,10 @@
 				</tr>
 
 				<tr>
-					<td id="amis"><?php include_once('friends_block.php'); ?></td>
+					<td id="amis"><?php require_once('friends_block.php'); ?></td>
 				</tr>
-
 				<tr>
-					<td></td>
+				<td></td>
 				</tr>
 			</table>
 

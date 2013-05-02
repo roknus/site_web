@@ -1,11 +1,136 @@
+<script type="text/javascript">
+<!--
+	function find_people(){				 
+		var search = $("#search_bar_input").val();
+		var data = { search : search };			
+		    $.ajax({
+			url: "recherche_personne.php",
+			data : data,
+			complete : function(xhr, result){
+				if(result != "success") return; 
+				var response = xhr.responseText;
+				$("#search_bar ul").empty();
+				$(response).appendTo("#search_bar ul");
+				$("#search_bar ul").show();
+			}
+		});	 
+	}
+
+	function notifications_amis(){
+		 if($("#notifications_list").html() == ""){
+		 	var data = { id : <?php echo $_SESSION["id"]; ?>};
+		 	$.ajax({
+				url: "friend_notifications.php",
+				data : data,
+				complete : function(xhr, result){
+					 if(result != "success") return; 
+					 var response = xhr.responseText;
+					 $(response).appendTo("#notifications_list");							 }
+		  	});
+		}
+		else{
+			$("#notifications_list").empty();	
+		}
+	}
+
+	function friend_notification_accept(id_notif){
+		 var data = { id : id_notif };
+		 $.ajax({
+			url: "friend_notification_accept.php",
+			data : data,
+			complete : function(xhr, result){
+				 if(result != "success") return; 
+				 var response = xhr.responseText;
+				 $(location).attr('href',"./?id=<?php echo $_GET["id"]; ?>");					 
+			 }
+	  	});
+	}
+
+	function friend_notification_refuse(id_notif){
+		 var data = { id : id_notif };
+		 $.ajax({
+			url: "friend_notification_refuse.php",
+			data : data,
+			complete : function(xhr, result){
+				 if(result != "success") return; 
+				 var response = xhr.responseText;				 
+			 }
+	  	});	 
+	}
+
+	function notifications_posts(){
+		 if($("#notifications_list").html() == ""){
+		 	var data = { id : <?php echo $_SESSION["id"]; ?>};
+		 	$.ajax({
+				url: "post_notifications.php",
+				data : data,
+				complete : function(xhr, result){
+					 if(result != "success") return; 
+					 var response = xhr.responseText;
+					 $(response).appendTo("#notifications_list");							 }
+		  	});
+		}
+		else{
+			$("#notifications_list").empty();	
+		}
+	}
+
+	function post_viewed(id){
+		 var data = {id : id};
+		 $.ajax({
+			url: "post_viewed.php",
+			data : data,
+			complete : function(xhr, result){
+				if(result != "success") return; 
+				var response = xhr.responseText;
+				$("#notifications_list").empty();
+				$(location).attr('href','./'+response)
+			 }
+		 });
+	}
+
+	function notifications_comments(){
+		 if($("#notifications_list").html() == ""){
+		 	var data = { id : <?php echo $_SESSION["id"]; ?>};
+		 	$.ajax({
+				url: "comment_notifications.php",
+				data : data,
+				complete : function(xhr, result){
+					 if(result != "success") return; 
+					 var response = xhr.responseText;
+					 $(response).appendTo("#notifications_list");							 }
+		  	});
+		}
+		else{
+			$("#notifications_list").empty();	
+		}
+	}
+
+	function check_notifications(){
+		$.ajax({
+			url: "check_notifications.php?id=<?php echo $_SESSION["id"]; ?>",
+			complete : function(xhr, result){
+				 if(result != "success") return; 
+				 var response = xhr.responseText;
+				 res = response.split('&');
+				 $(".button_friends span").html(res[0]);
+				 $(".button_posts span").html(res[1]);
+				 $(".button_comments span").html(res[2]);	
+				 			 
+			 }
+	  	}); 
+	}
+//-->
+</script>
+
 <div id="nav">
      <ul>
 	<li>
 		<table id="notifications">
 			<tr>
-				<td id="friend_notifications"><button class="button_friends" onclick="javascript:notifications_amis();">1</button></td>
-				<td id="post_notifications"><button class="button_posts" onclick="javascript:notifications_amis();">2</button></td>
-				<td id="comment_notifications"><button class="button_comments" onclick="javascript:notifications_amis();">0</button></td>
+				<td id="friend_notifications"><button class="button_friends" onclick="javascript:notifications_amis();"><span></span></button></td>
+				<td id="post_notifications"><button class="button_posts" onclick="javascript:notifications_posts();"><span></span></button></td>
+				<td id="comment_notifications"><button class="button_comments" onclick="javascript:notifications_comments();"><span></span></button></td>
 			</tr>
 		</table>
 		<ul id="notifications_list"></ul>
@@ -24,7 +149,7 @@
 					<a href="/inTouch/home/?id=<?php echo $_SESSION["id"];?>"><?php echo $_SESSION["login"]; ?></a>
 				</td>
 				<td>
-					<a href="/inTouch/modifPerso.php">Profil</a>
+					<a href="modifPerso.php?id=<?php echo $_SESSION["id"]; ?>">Profil</a>
 				</td>
 				<td>
 					<a href="/inTouch/deconnexion.php">Deconnexion</a>

@@ -43,6 +43,22 @@ p {
 	line-height: 1.5em;
 }
 
+#profil form input[type="submit"]{
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: #C94700;
+	color: #eee;
+	font-weight: bold;
+	margin-bottom: 2em;
+	text-transform: uppercase;
+	width: 280px;
+}
+
+#profil form input[type="submit"]:hover {
+	background-color: #F5991A;
+}
+
 #deco form input[type="submit"]{
 	border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -53,6 +69,10 @@ p {
 	margin-bottom: 2em;
 	text-transform: uppercase;
 	width: 280px;
+}
+
+#deco form input[type="submit"]:hover {
+	background-color: #F5991A;
 }
 
 .clearfix:before, .clearfix:after {
@@ -246,7 +266,7 @@ margin : 10px auto auto auto;
 	background-color: #F5991A;
 }
 
-#valide form input[type="submit"] {
+#valide input[type="submit"] {
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;

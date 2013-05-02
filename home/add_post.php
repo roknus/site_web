@@ -10,7 +10,7 @@
 			'content'=>$post,
 			'picture'=>$pic,
 			'creation_time'=>date("Y-m-d H:i:s",time())));
-		$request = $bdd->query('SELECT MAX(id) AS max_id FROM posts WHERE id_wall='.$_SESSION["id"].';');
+		$request = $bdd->query('SELECT MAX(id) AS max_id FROM posts WHERE id_wall='.$wall.';');
 		$data = $request->fetch();
 		return $data["max_id"];
 	}

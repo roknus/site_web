@@ -10,7 +10,7 @@
 		));
 	$message = "";
 	while($data = $request->fetch()){
-		    $message .= '<li><span class="user_name">'.$data["login"].'</span> vous à ajouter en tant qu&rsquo;amis.<br/><span class="notifications_button" onclick="javascript:friend_notification_accept('.$data["notifID"].');">Accepter</span> - <span class="notifications_button" onclick="javascriptfriend_notification_reject('.$data["notifID"].'):;">Refuser</span></li>';
+		    $message .= '<li><span class="user_name">'.$data["login"].'</span> vous à ajouter en tant qu&rsquo;amis.<br/><i>"'.$data["content"].'"</i><span class="notifications_button" onclick="javascript:friend_notification_accept('.$data["notifID"].');">Accepter</span> - <span class="notifications_button" onclick="javascriptfriend_notification_reject('.$data["notifID"].'):;">Refuser</span></li>';
 	}
 	echo $message;	
 }
