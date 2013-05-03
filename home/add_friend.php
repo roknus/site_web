@@ -1,4 +1,7 @@
 <?php
+	session_start();
+	include_once('refresh_derniere_action.php');
+	action();
 	if(isset($_GET["poster"]) AND ($_GET["poster"] != "") AND isset($_GET["profile"]) AND ($_GET["profile"] != "")){
 		require_once('connection_db.php');
 		if(isset($_GET["message"]) AND ($_GET["message"] != "")){

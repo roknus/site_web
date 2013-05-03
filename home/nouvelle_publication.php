@@ -38,9 +38,9 @@
 							<span class="comments_button" onclick="ouvrirCommentaire(this);">Commenter</span>
 							-
 							il y a un instant
-							<table id="comment_table" style="display:none;">
+							<table class="comment_table" style="display:none">
 								<tr id="comment_input">
-                                   	<td><img src="img/'.$data["image_profil"].'.'.$data["type"].'" height="30" width="30"/></td>
+									<td><img src="img/'.$data["image_profil"].'.'.$data["type"].'" height="30" width="30"/></td>
 									<td>
 										<textarea class="comment_post" cols="40" rows="2" style="border: 1px solid rgb(200,200,250);" placeholder="Ecrire un commentaire...">
 										</textarea>

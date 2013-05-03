@@ -1,0 +1,12 @@
+<?php
+	session_start();
+	include_once('refresh_derniere_action.php');
+	action();
+	require_once('connection_db.php');
+	$db = connect_db();
+	$request = $db->query('SELECT * FROM membre,amis WHERE amis.id1 = '.$_SESSION["id"].' AND amis.id2 = membre.id AND derniere_action > '.(time()-(20*60)).';');
+	$message="";
+	while($data = $request->fetch()){
+		$message .='<li>'.$data["login"].'</li>';
+	}
+	echo $message;

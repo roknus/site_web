@@ -18,6 +18,7 @@
 		<td>
 			<div id="profile_description">
 			     <?php
+			     echo $data["derniere_action"].'<br/>';
 				if($data["nom"]!=NULL AND $data["prenom"]!=NULL){
 					echo $data["nom"].' '.$data["prenom"].'<br/>';
 				}

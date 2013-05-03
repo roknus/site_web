@@ -1,0 +1,5 @@
+<?php
+
+	require_once('connection_db.php');
+	$db = connect_db();
+	

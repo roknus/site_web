@@ -5,7 +5,10 @@
 	}
 	date_default_timezone_set('Europe/Berlin');
         include_once('connection_db.php');
-        include_once('print_posts.php');?>
+        include_once('print_posts.php');
+	include_once('refresh_derniere_action.php');
+	action();
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
@@ -98,7 +101,8 @@
 		}
 		
 		function ouvrirCommentaire(obj){
-			$(obj).next("#comment_table").toggle();
+			$(obj).next(".comment_table").toggle();
+			
 		}	
 		
 		function friend_request_popup(){
@@ -172,7 +176,7 @@
 						}
 					}
 					else{
-						$(this).find('#comment_table').hide();
+						$(this).find('.comment_table').hide();
 					}
 				});
 				setInterval(function(){

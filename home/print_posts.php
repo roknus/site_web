@@ -42,12 +42,12 @@
 					</tr>
 					<tr>
 						<td class="post_time">
+							<button class="button_like">0</button>
+							-
 							<span class="comments_button" onclick="ouvrirCommentaire(this);">Commenter</span>
 							-
 							il y a '.tempsPost(time()-strtotime($data["creation_time"])).'
-							-
-							<button class="button_like">0</button>
-							<table id="comment_table">'.print_comments($data["postID"]).'
+							<table class="comment_table">'.print_comments($data["postID"]).'
 								<tr id="comment_input">
                                    	                                <td><img src="img/'.get_profile_pic_path($_SESSION["id"]).'" height="30" width="30"/></td>
 									<td>

@@ -1,4 +1,7 @@
 <?php 
+	session_start();
+	include_once('refresh_derniere_action.php');
+	action();
 	function addPost($post,$wall,$pic){	
 	
 		$bdd = connect_db();

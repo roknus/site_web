@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	include_once('refresh_derniere_action.php');
+	action();
 	$id = $_GET["id"];
 	require_once("connection_db.php");
 	$db = connect_db();
