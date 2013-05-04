@@ -4,10 +4,19 @@
 	require_once('temps_post.php');
 	require_once('get_profile_picture.php');
 
+	function get_likes($id){
+		 $db = connect_db();
+		 $request = $db->query('SELECT * FROM likes WHERE id_post = '.$id.' ;');
+		 if($request->rowCount()) return $request->rowCount();
+		 else return 0;
+	}
+
 	function print_posts(){
+		if(!isset($_GET["page"]))$page = 1;
+		else $page = $_GET["page"];
 	 	$id = $_GET["id"];
 		$db = connect_db();
-		$request = $db->prepare('SELECT *,posts.id AS postID, posts.id_owner AS ownerID FROM posts,pictures,membre WHERE posts.picture = pictures.id AND posts.id_owner = membre.id AND posts.id_wall = :id  ORDER BY creation_time DESC LIMIT 0,10;');
+		$request = $db->prepare('SELECT *,posts.id AS postID, posts.id_owner AS ownerID FROM posts,pictures,membre WHERE posts.picture = pictures.id AND posts.id_owner = membre.id AND posts.id_wall = :id  ORDER BY creation_time DESC LIMIT '.(($page-1)*10).',10;');
 		$request->execute(array('id'=>$id));		
 		while($data = $request->fetch()){
 			echo
@@ -42,7 +51,7 @@
 					</tr>
 					<tr>
 						<td class="post_time">
-							<button class="button_like">0</button>
+							<button class="button_like" onclick="like('.$data["postID"].',this)"><span>'.get_likes($data["postID"]).'</span></button>
 							-
 							<span class="comments_button" onclick="ouvrirCommentaire(this);">Commenter</span>
 							-
@@ -64,3 +73,21 @@
 		}
 	}
 	
+	function print_page(){
+		 if(isset($_GET["page"])) $page = $_GET["page"];
+		 else $page = 1;
+		 
+		 $db = connect_db();
+		 $id = $_GET["id"];
+		 $request = $db->query('SELECT * FROM posts WHERE id_wall = '.$id.';');
+		 $nb = $request->rowCount();
+		 $nb = ceil($nb/10);
+		 $pages = '<div id="pages">';
+		 if($page != 1) $pages .= '<a href="./?id='.$id.'&page='.($page-1).'" ><<</a> ';
+		 for($i = 1;$i<=$nb;$i++){
+		 	$pages .= '<a href="./?id='.$id.'&page='.$i.'" >'.$i.'</a> ';
+		 }
+		 if($page != ($i-1)) $pages .= '<a href="./?id='.$id.'&page='.($page+1).'" >>></a>';
+		 $pages .= '</div>';
+		 echo $pages;
+	}

@@ -234,14 +234,19 @@ body{
 }
 
 .friend_chat_block{
+    font-size: 12px;
     display:none;
     background-color:rgb(230,230,230);
     border: 1px solid rgb(150,150,150);
     height: 280px;
-    width:220px;
+    width:222px;
     position:relative;
     top:-300px;
     left:-50px;
+}
+
+.oldies{
+    color: rgb(150,150,150);
 }
 
 .friend_chat_block textarea{
@@ -262,6 +267,7 @@ body{
     color: black;
     overflow-y:scroll;
     border-bottom:1px solid black;
+    padding-left:2px;
 }
 
 #page{
@@ -407,6 +413,15 @@ textarea{
 
 .comments .post_time{
     font-size: 11px;
+}
+
+#pages{
+    text-align:center;
+    width:100%;
+}
+
+#pages a{
+    color: black;
 }
 
 #add_friend_popup{

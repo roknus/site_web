@@ -26,7 +26,7 @@
 		$('#connected_friends_block').hide();
 		$("#connected_friends").css("top","-25px");
 
-		$("<li><div class='friend_chat_block'><div class='friend_chat_title'><strong>"+login+"</strong></div><div class='friend_chat_content'></div><div class='chat_input' name='"+id+"'><textarea rows='2' cols='30'></textarea></div></div><div class='friend_chat' onclick='toggle_friend_chat(this)'><strong>"+login+"</strong></div></li>").appendTo("#chat_bar");	
+		$("<li><div class='friend_chat_block'><div class='friend_chat_title'><table><tr><td style='width:180px;'><strong>"+login+"</strong></td><td style='cursor:pointer;' onclick='fermerChat(this,\""+login+"\")'><img src='cross.png' height='17' width='17'/></td></tr></table></div><div class='friend_chat_content'></div><div class='chat_input' name='"+id+"'><textarea rows='2' cols='30'></textarea></div></div><div class='friend_chat' onclick='toggle_friend_chat(this)'><strong>"+login+"</strong></div></li>").appendTo("#chat_bar");	
 	}
 
 	function toggle_friend_chat(obj){
@@ -41,32 +41,66 @@
 				}
 			});
 			historique(id,obj);
-			var interval = setInterval(function(){
+			setTimeout(function(){getMessages(id,obj);},200);
+			interval = setInterval(function(){
 			    	var data = {id : id};
 				$.ajax({
 					url: "check_message.php",
 					data : data,
 					complete : function(xhr, result){
 						if(result != "success") return; 
-						var response = xhr.responseText;					
-						$(obj).parent().find('.friend_chat_content').append(response);
-						var scroll = $(obj).parent().find(".friend_chat_content").scrollTop();
-						$(obj).parent().find(".friend_chat_content").scrollTop(scroll +100);	
+						var response = xhr.responseText;
+						if(response != ""){					
+							    $(obj).parent().find('.friend_chat_content').append(response);
+							    var scroll = $(obj).parent().find(".friend_chat_content").scrollTop();
+							    $(obj).parent().find(".friend_chat_content").scrollTop(scroll +100);
+						}	
 					}
 			  	});	 
 			},1000);
 		 }
 		 else{
 			$(obj).prev().hide();
+			$(obj).parent().find('.friend_chat_content').empty();
 			$(obj).css("top","-25px");
-			$(obj).find(".chat_input").unbind();
+			$(obj).parent().find(".chat_input").unbind('keydown');
+			clearInterval(interval);
 		 }
+	}
+
+	function fermerChat(obj,login){
+		clearInterval(interval);
+		$(obj).parent().parent().parent().parent().parent().parent().remove();	
+		data = {login : login}	
+		$.ajax({
+			url: "close_chat.php",
+			data : data,
+			complete : function(xhr, result){
+				if(result != "success") return; 
+				var response = xhr.responseText;
+			}
+		});
 	}
 
 	function historique(id,obj){
 		var data = { id : id };
 		$.ajax({
 			url: "historique.php",
+			data : data,
+			complete : function(xhr, result){
+				if(result != "success") return; 
+				var response = xhr.responseText;					
+				$(obj).parent().find('.friend_chat_content').append(response);
+				var scroll = $(obj).parent().find(".friend_chat_content").scrollTop();
+				$(obj).parent().find(".friend_chat_content").scrollTop(scroll +100);					
+			}
+		  });	 
+	}
+
+	function getMessages(id,obj){
+		var data = { id : id };
+		$.ajax({
+			url: "get_messages.php",
 			data : data,
 			complete : function(xhr, result){
 				if(result != "success") return; 
@@ -112,6 +146,7 @@
 <script type="text/javascript">
 <!--
 	var chats = new Array();
+	var interval;
 	var chat = setInterval(function(){
 			$.ajax({
 				url: "check_chat.php",

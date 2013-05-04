@@ -1,0 +1,4 @@
+<?php
+	require_once('connection.php');
+	$db = connect_db();
+	$db->('INSERT INT like (id_post,id_liker) VALUES ("1","2");');

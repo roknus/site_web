@@ -8,7 +8,7 @@
 	$id = $_GET["id"];
 	
 	$db = connect_db();
-	$db->query('INSERT INTO messages (id_from,id_to,content,time,checked) VALUES ("'.$_SESSION["id"].'","'.$id.'","'.$message.'","'.date("Y-m-d H:i:s",time()).'","0");');
+	$db->query('INSERT INTO messages (id_from,id_to,content,time,checked) VALUES ("'.$_SESSION["id"].'","'.$id.'","'.$message.'","'.time().'","0");');
 	echo '<span class="user_name">'.$_SESSION["login"].' : </span>'.$message.'<br/>';
 
 	

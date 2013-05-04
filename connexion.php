@@ -43,7 +43,7 @@ session_start();    //on active le systeme session pour conserver des variables 
                 $_SESSION["id"] = $res["id"];
                 $_SESSION["chats"] = array();
                 $db = connect_db();
-                $db->query('UPDATE membre SET derniere_connexion = \''.date("Y-m-d H:i:s",time()).'\' WHERE id = \''.$_SESSION["id"].'\';');
+                $db->query('UPDATE membre SET derniere_connexion = '.time().' WHERE id = '.$_SESSION["id"].';');
 		header("Location:home/?id=".$res["id"]);
 	}
 	else {

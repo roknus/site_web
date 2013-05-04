@@ -139,6 +139,19 @@
 			  });	
 			 
 		}
+
+		function like(id,obj){
+			 var data = {id : id};
+			 $.ajax({
+				url: "add_like.php",
+				data : data,
+				complete : function(xhr, result){
+					if(result != "success") return; 
+					var response = xhr.responseText;
+					$(obj).find("span").html(response);			
+				}
+			  }); 
+		}
 		
 		//-->
 		</script>
@@ -258,7 +271,8 @@
 						<div id="mes_publications">
 							<?php
 								print_posts();
-							?>
+								print_page();
+							?>							
 						</div>
 					
 					</td>
