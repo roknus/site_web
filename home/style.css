@@ -227,6 +227,7 @@ body{
     padding: 10px;
     width: 200px;
     text-align:center;
+    text-transform:capitalize;
     cursor:pointer;    
     position:relative;
     top:-25px;
@@ -238,10 +239,10 @@ body{
     display:none;
     background-color:rgb(230,230,230);
     border: 1px solid rgb(150,150,150);
-    height: 280px;
+    height: 320px;
     width:222px;
     position:relative;
-    top:-300px;
+    top:-346px;
     left:-50px;
 }
 
@@ -257,12 +258,13 @@ body{
     background-color: #396bc6;
     color:#c84600;
     margin: 0px;
-    padding: 10px;
+    padding: 5px;
+    padding-left: 10px;
     font-size: 16px;
 }
 
 .friend_chat_content{
-    height:200px;
+    height:250px;
     width:220px;
     color: black;
     overflow-y:scroll;

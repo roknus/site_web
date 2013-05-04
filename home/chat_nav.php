@@ -25,8 +25,14 @@
 		$("#connected_friends_content").empty();
 		$('#connected_friends_block').hide();
 		$("#connected_friends").css("top","-25px");
-
-		$("<li><div class='friend_chat_block'><div class='friend_chat_title'><table><tr><td style='width:180px;'><strong>"+login+"</strong></td><td style='cursor:pointer;' onclick='fermerChat(this,\""+login+"\")'><img src='cross.png' height='17' width='17'/></td></tr></table></div><div class='friend_chat_content'></div><div class='chat_input' name='"+id+"'><textarea rows='2' cols='30'></textarea></div></div><div class='friend_chat' onclick='toggle_friend_chat(this)'><strong>"+login+"</strong></div></li>").appendTo("#chat_bar");	
+		
+		var test = true;
+		$(".chat_input").each(function(i){
+			if($(this).attr("name") == id) test = false;
+		});
+		if(test == true){
+			$("<li><div class='friend_chat_block'><div class='friend_chat_title'><table><tr><td style='width:180px;text-transform:capitalize;'><strong>"+login+"</strong></td><td style='cursor:pointer;' onclick='fermerChat(this,\""+login+"\")'><img src='cross.png' height='17' width='17'/></td></tr></table></div><div class='friend_chat_content'></div><div class='chat_input' name='"+id+"'><textarea rows='2' cols='30'></textarea></div></div><div class='friend_chat' onclick='toggle_friend_chat(this)'><strong>"+login+"</strong></div></li>").appendTo("#chat_bar");	
+		}
 	}
 
 	function toggle_friend_chat(obj){
@@ -34,7 +40,7 @@
 		 if($(obj).prev().css("display") == "none"){
 		 	clearInterval(interval);
 		 	$(obj).prev().show();
-			$(obj).css("top","-307px");
+			$(obj).css("top","-347px");
 			$(obj).parent().find(".chat_input").bind('keydown',function(event){
 				if(event.keyCode == 13){
 					nouveauMessage(this);

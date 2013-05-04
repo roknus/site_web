@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	include_once('refresh_derniere_action.php');
 	action();
 	function addComment($id_post,$comment){

@@ -17,66 +17,60 @@
 					return true;
 				}
 			}
-			
-			
-					
-		</script>
 		
+		</script>		
     </head>
 
     
-    
-    
-    
+
     <body>
-    
-   
-    
-    <p style="text-align:center;"><img src="Logo.png"/></p>
-    </br>
-    
+ 
+    <p style="text-align:center;"><a href="index.html"><img src="images(site)/Logo.png"/></a></p>   
 
-    
-    
     	<table class="tborder">
+        	<tr>
+				<td class="ttitle" style="text-align:center;"><strong><h2>inTouch est un outil de communication universel qui permet de retrouver des amis.</h2></strong></td></br>
+            </tr>            
+            <tr>
+            	<td class="ttitle" style="text-align:center;"><strong><h2>Abonnez-vous et partagez ce que vous aimez!;)</h2></strong></td></br>
+            </tr>        
 			<tr>
-				<td class="ttitle" style="text-align:center;"><strong><h1>INSCRIPTION</h1></strong></td>
+				<td class="ttitle" style="text-align:center;"><strong><h1>INSCRIPTION</h1></strong></td></br>
             </tr>
-            
-           
         </table>
-
-    
+        
+          
     
     <div id="login">
-
-
-           <form name="form" action="inscription.php" method="post" onsubmit="javascript: return verif_mdp('mdp_1', 'mdp_2');">  
-         
+           <form name="form" action="inscription.php" method="post" onsubmit="javascript: return verif_mdp('mdp_1', 'mdp_2');">           
              <fieldset class="clearfix">
-
+             
                 <legend class="legend"> Login et Mot de passe</legend>
-                
-                <p><input type="text" value="Login" name="login"><sup>*</sup></p> 
-                <p><input type="password" value="Nouveau mot de passe" name="mdp" id="mdp_1" size="25" maxlength="30"><sup>*</sup></p>                 
-                <p><input type="password" value="Confirmez votre mot de passe" name="mdp" id="mdp_2" size="25" maxlength="30"><sup>*</sup></p> 
+                                
+                <p><input type="text" value="Login" name="login" onBlur="if(this.value == '') this.value = 'Login'" onFocus="if(this.value == 'Login') this.value = ''" required><sup>*</sup></p> 
+                <p><input type="password" value="Nouveau mot de passe" name="mdp" id="mdp_1" size="25" maxlength="30" onBlur="if(this.value == '') this.value = 'Nouveau mot de passe'" onFocus="if(this.value == 'Nouveau mot de passe') this.value = ''" required><sup>*</sup></p>                 
+                <p><input type="password" value="Confirmez votre mot de passe" name="mdp" id="mdp_2" size="25" maxlength="30" onBlur="if(this.value == '') this.value = 'Confirmez votre mot de passe'" onFocus="if(this.value == 'Confirmez votre mot de passe') this.value = ''" required><sup>*</sup></p> 
  
             </fieldset>
-
-
-       
+			
+            
             <fieldset class="clearfix">
                 
                 <legend class="legend"> Informations personnelles</legend>
-                <p><input id="Nom" type="text" value="Nom" name="nom"><sup>*</sup></p>
+                <p><input id="Nom" type="text" value="Nom" name="nom" onBlur="if(this.value == '') this.value = 'Nom'" onFocus="if(this.value == 'Nom') this.value = ''" required><sup>*</sup></p>
                 
-                <p><input id="Prenom" type="text" value="Prenom"  name="prenom"><sup>*</sup></p> 
+                <p><input id="Prenom" type="text" value="Prenom"  name="prenom" onBlur="if(this.value == '') this.value = 'Prenom'" onFocus="if(this.value == 'Prenom') this.value = ''" required><sup>*</sup></p> 
                 
-                <p><input id="sign_up_email" type="text" value="Email" name="mail" size="25" maxlength="50"><sup>*</sup></p>
+                <p><input id="sign_up_email" type="text" value="Email" name="mail" size="25" maxlength="50" onBlur="if(this.value == '') this.value = 'Email'" onFocus="if(this.value == 'Email') this.value = ''" required><sup>*</sup></p>
                 
-				<p><input id="sign_up_email_confirm" type="text" value="Confirmez votre email" name="mail" size="25" maxlength="50"><sup>*</sup></p>
+				<p><input id="sign_up_email_confirm" type="text" value="Confirmez votre email" name="mail" size="25" maxlength="50" onBlur="if(this.value == '') this.value = 'Confirmez votre email'" onFocus="if(this.value == 'Confirmez votre email') this.value = ''" required><sup>*</sup></p>
                 
-				<p><input id="Sexe" type="text" value="Sexe" name="sexe"><sup>*</sup></p> 
+                <p> <h3>Sexe :</h3> <select name="sexe">
+                	<option value="" selected="selected"></option>
+                    <option value="Sexe">Femme</option>
+                    <option value="Sexe">Homme</option>
+                    </select>
+				<sup>*</sup></p> 
 
 
 
