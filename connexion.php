@@ -14,7 +14,8 @@
 <?php
 session_start();    //on active le systeme session pour conserver des variables qu'on transmettra de page en page 
 
-
+        
+        require_once('home/connection_db.php');
 	//on cree les variables d'identification login et mot de passe
 	
 	
@@ -41,6 +42,8 @@ session_start();    //on active le systeme session pour conserver des variables 
                 $res = mysql_fetch_assoc($result);  
                 $_SESSION["id"] = $res["id"];
                 $_SESSION["chats"] = array();
+                $db = connect_db();
+                $db->query('UPDATE membre SET derniere_connexion = \''.date("Y-m-d H:i:s",time()).'\' WHERE id = \''.$_SESSION["id"].'\';');
 		header("Location:home/?id=".$res["id"]);
 	}
 	else {

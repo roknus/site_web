@@ -14,12 +14,4 @@
 		    $db->query('UPDATE messages SET checked ="1" WHERE id ='.$data["messagesID"].';');
 		    $message .= '<span class="user_name">'.$data["login"].' : </span>'.$data["content"].'<br/>';
 	}
-
-	$chats = $_SESSION["chats"];
-	$request = $db->query('SELECT * FROM membre WHERE id ='.$id_from.';');
-	$data = $request->fetch();
-	if(!(in_array($data["login"],$chats))){
-		$chats[$data["login"]] = $data["id"];
-	}
-	$_SESSION["chats"] = $chats;
 	echo $message;
