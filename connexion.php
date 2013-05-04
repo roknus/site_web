@@ -40,6 +40,7 @@ session_start();    //on active le systeme session pour conserver des variables 
 		$_SESSION['login'] = $login;
                 $res = mysql_fetch_assoc($result);  
                 $_SESSION["id"] = $res["id"];
+                $_SESSION["chats"] = array();
 		header("Location:home/?id=".$res["id"]);
 	}
 	else {

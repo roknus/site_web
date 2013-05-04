@@ -1,0 +1,10 @@
+<?php
+	session_start();	
+	require_once('connection_db.php');
+
+	$id = $_SESSION["id"];
+
+	$db = connect_db();
+	$request = $db->query('SELECT * FROM membre,messages WHERE messages.id_from = membre.id AND messages.id_to = '.$id.' AND checked = "0" GROUP BY messages.id_from;');
+	$r
+	echo ;

@@ -238,9 +238,14 @@ body{
     background-color:rgb(230,230,230);
     border: 1px solid rgb(150,150,150);
     height: 280px;
+    width:220px;
     position:relative;
     top:-300px;
     left:-50px;
+}
+
+.friend_chat_block textarea{
+    width:220px;
 }
 
 .friend_chat_title{
@@ -253,6 +258,7 @@ body{
 
 .friend_chat_content{
     height:200px;
+    width:220px;
     color: black;
     overflow-y:scroll;
     border-bottom:1px solid black;

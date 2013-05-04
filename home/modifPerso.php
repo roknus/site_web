@@ -37,6 +37,12 @@
 			setInterval(function(){
 						check_notifications();							
 						},1000);
+
+			<?php
+				foreach($_SESSION["chats"] as $login => $id){
+					echo 'start_chat("'.$id.'","'.$login.'");';
+				}
+			?>
 		});
 
 	//-->
