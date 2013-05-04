@@ -21,6 +21,25 @@
 		});
 	}
 
+	function start_chat(id,login){
+		$("#connected_friends_content").empty();
+		$('#connected_friends_block').hide();
+		$("#connected_friends").css("top","-25px");
+
+		$("<li><div class='friend_chat_block'><div class='friend_chat_title'><strong>"+login+"</strong></div><div class='friend_chat_content'></div><textarea rows='2' cols='32'></textarea></div><div class='friend_chat' onclick='toggle_friend_chat(this)'><strong>"+login+"</strong></div></li>").appendTo("#chat_bar");
+	}
+
+	function toggle_friend_chat(obj){
+		 if($(obj).prev().css("display") == "none"){
+		 	$(obj).prev().show();
+			$(obj).css("top","-307px");
+		 }
+		 else{
+			$(obj).prev().hide();
+			$(obj).css("top","-25px");
+		 }
+	}
+
 //-->
 </script>
 
