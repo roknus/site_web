@@ -35,7 +35,7 @@ if( isset($_POST['picture_title_input']) AND ($_POST['picture_title_input'] != "
     {
 	header('Location:./?id='.$_POST["wall"]);
     }
-	addPicture('1',$_FILES['uploaded_picture']['name'],$type,$_POST['picture_title_input']);
+	addPicture($_POST["wall"],$_FILES['uploaded_picture']['name'],$type,$_POST['picture_title_input']);
 	addPost($_POST['picture_description'],$_POST["wall"],$name_file);
 	if(isset($_POST["image_profil"]) AND ($_POST["image_profil"] == "1")){
 	

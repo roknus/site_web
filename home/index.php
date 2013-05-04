@@ -213,9 +213,14 @@
 					<?php include_once('profile_block.php'); ?>
 					<br/>
 					<?php
-						if($_SESSION["id"] != $_GET["id"]){// A refaire
-								   echo '<input type="button" value="Ajouter..." onclick="javascript:friend_request_popup();" />';
+						if($_SESSION["id"] != $_GET["id"]){
+								   $db = connect_db();
+								   $request = $db->query('SELECT * FROM amis WHERE id1 = '.$_GET["id"].' AND id2 = '.$_SESSION["id"].';');
+								   if($request->rowCount() == false){
+									echo '<input type="button" value="Ajouter..." onclick="javascript:friend_request_popup();" />';			
+								   }					   
 						}
+						echo '<input type="button" value="Photos" onclick="javascript:$(location).attr(\'href\',\'./photo.php?id='.$_GET["id"].'\')" />';	
 					?>
 					</td>
 					<td rowspan="3" id="mur"> 
@@ -223,9 +228,8 @@
 						   <div id="tabs">
 								<ul>
 									<li><a href="#tab1"><strong>Status</strong></a></li>
-									<li><a href="#tab2"><strong>Photo</strong></a></li>	
-									<li><a href="#tab3"><strong>Lieu</strong></a></li>
-									<li><a href="#tab4"><strong>Ev&#232;nement</strong></a></li>
+									<li><a href="#tab2"><strong>Photo</strong></a></li>
+									<li><a href="#tab3"><strong>Ev&#232;nement</strong></a></li>
 								</ul>
 								<div id="tab1">
 									<table id="post_border" >
@@ -264,7 +268,6 @@
 									</table>
 								</div>
 								<div id="tab3">onglet 3</div>
-								<div id="tab4">onglet 4</div>
 							</div>
 						</div>
 
