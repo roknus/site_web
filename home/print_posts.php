@@ -16,7 +16,7 @@
 		else $page = $_GET["page"];
 	 	$id = $_GET["id"];
 		$db = connect_db();
-		$request = $db->prepare('SELECT *,posts.id AS postID, posts.id_owner AS ownerID FROM posts,pictures,membre WHERE posts.picture = pictures.id AND posts.id_owner = membre.id AND posts.id_wall = :id  ORDER BY creation_time DESC LIMIT '.(($page-1)*10).',10;');
+		$request = $db->prepare('SELECT *,posts.id AS postID, posts.id_owner AS ownerID FROM posts,membre WHERE posts.id_owner = membre.id AND posts.id_wall = :id  ORDER BY creation_time DESC LIMIT '.(($page-1)*10).',10;');
 		$request->execute(array('id'=>$id));		
 		while($data = $request->fetch()){
 			echo
@@ -27,21 +27,34 @@
 							<img src="img/'.get_profile_pic_path($data["ownerID"]).'" height="45" width="45"/>
 						</td>
 						<td class="user_name"><strong>'.$data["login"].'</strong></td>
-					</tr>	
-					<tr>
-						<td>'.$data["content"].'</td>
-					</tr>
+					</tr>				
+					<tr>';
+						if($data["event"] != 0){
+							$request2 = $db->query('SELECT * FROM evenements WHERE id = '.$data["event"].' ;');
+							$data2 = $request2->fetch();
+						
+							echo '<td><div class="evenement_post"><strong>'.$data2["nom"].'</strong><br/><i>'.$data2["description"].'</i><br/>à '.$data2["lieu"].' le '.$data2["date"].'</div>
+							     
+							<div class="geo_event" id="geo_event'.$data2["id"].'"><script>initialize("geo_event'.$data2["id"].'");codeLatLng("'.$data["ll"].'");</script></div>
+							</td>';						
+						}
+						else{
+							echo '<td>'.$data["content"].'</td>';
+						}
+					echo '</tr>
 					<tr>';
 					
-					if($data["picture"] != '1'){
+					if($data["picture"] != 0){
+						$request2 = $db->query('SELECT * FROM pictures WHERE id = '.$data["picture"].' ;');
+						$data2 = $request2->fetch();
 						echo '
 						<td>
 							<table>
 								<tr>
-									<td><img class="post_picture" src="img/'.$data["picture"].'.'.$data["type"].'" />
+									<td><img class="post_picture" src="img/'.$data["picture"].'.'.$data2["type"].'" />
 								</tr>
 								<tr class="picture_title">
-									<td>- '.$data["title"].' -</td>
+									<td>- '.$data2["title"].' -</td>
 								</tr> 
 							</table>
 						</td>';

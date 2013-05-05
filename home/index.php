@@ -285,7 +285,7 @@
 				$("#tabs").tabs();	
 				$("title").html("inTouch | <?php echo $_SESSION["login"]; ?>");	
 				check_notifications();
-				$("#datepicker").datepicker();
+				$("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 				$(".button_friends").button({icons:{primary:"ui-icon-person"},text:true});
 				$(".button_posts").button({icons:{primary:"ui-icon-document-b"},text:true});
 				$(".button_comments").button({icons:{primary:"ui-icon-comment"},text:true});
@@ -310,7 +310,7 @@
 					}
 				});
 				setInterval(function(){
-											check_notifications();							
+							check_notifications();							
 							},1000);
 				<?php
 					foreach($_SESSION["chats"] as $login => $id){

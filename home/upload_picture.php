@@ -38,7 +38,7 @@ if( isset($_POST['picture_title_input']) AND ($_POST['picture_title_input'] != "
     		}
 		else{
 			addPicture($wall,$_FILES['uploaded_picture']['name'],$type,$_POST['picture_title_input']);
-			addPost($_POST['picture_description'],$wall,$name_file);
+			addPost($_POST['picture_description'],$wall,$name_file,'0');
 			if(isset($_POST["image_profil"]) AND ($_POST["image_profil"] == "1")){
 	
 				$db = connect_db();

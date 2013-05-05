@@ -48,23 +48,25 @@
 				}
 			});
 			historique(id,obj);
-			setTimeout(function(){getMessages(id,obj);},200);
-			interval = setInterval(function(){
-			    	var data = {id : id};
-				$.ajax({
-					url: "check_message.php",
-					data : data,
-					complete : function(xhr, result){
-						if(result != "success") return; 
-						var response = xhr.responseText;
-						if(response != ""){					
-							    $(obj).parent().find('.friend_chat_content').append(response);
-							    var scroll = $(obj).parent().find(".friend_chat_content").scrollTop();
-							    $(obj).parent().find(".friend_chat_content").scrollTop(scroll +10000);
-						}	
-					}
-			  	});	 
-			},1000);
+			setTimeout(function(){
+				getMessages(id,obj);
+				interval = setInterval(function(){
+			    		 var data = {id : id};
+					 $.ajax({
+						url: "check_message.php",
+						data : data,
+						complete : function(xhr, result){
+							 if(result != "success") return; 
+							 var response = xhr.responseText;
+							 if(response != ""){					
+							 	     $(obj).parent().find('.friend_chat_content').append(response);
+							    	     var scroll = $(obj).parent().find(".friend_chat_content").scrollTop();
+							    	     $(obj).parent().find(".friend_chat_content").scrollTop(scroll +10000);
+							 }	
+						}
+			  		});	 
+				},1000);
+			},200);
 		 }
 		 else{
 			$(obj).prev().hide();
@@ -180,7 +182,7 @@
 					}					
 				}
 		  	});	 
-		},1000);
+		},2000);
 
 //-->
 </script>

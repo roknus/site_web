@@ -11,7 +11,7 @@
 	
 	$message = "";
 	while($data = $request->fetch()){
-		    $db->query('UPDATE messages SET checked ="1" WHERE id ='.$data["messagesID"].';');
+		    $db->query('UPDATE messages SET checked = 1 WHERE id = '.$data["messagesID"].';');
 		    $message .= '<span class="user_name">'.$data["login"].' : </span>'.$data["content"].'<br/>';
 	}
 

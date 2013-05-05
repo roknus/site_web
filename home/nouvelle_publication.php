@@ -7,7 +7,7 @@
 	$post = $_GET["post"];
 	$post = nl2br($post);
 	$wall = $_GET["wall"];
-	$id = addPost($post,$wall,'1');
+	$id = addPost($post,$wall,'0','0');
 	$db = connect_db();
 	$request = $db->prepare('SELECT * FROM membre,pictures WHERE membre.image_profil = pictures.id AND membre.id = :id');
 	$request->execute(array('id'=>$_SESSION["id"]));

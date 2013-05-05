@@ -10,9 +10,14 @@
 	$ll = $_GET["ll"];
 	$date = $_GET["date"];
 
-	$id = addPost($desc,$_SESSION["id"],'1');
-
 	$db = connect_db();
+	$db->query('INSERT INTO evenements (nom,description,lieu,date,ll) VALUES ("'.$nom.'","'.$desc.'","'.$lieu.'","'.$date.'","'.$ll.'") ;');
+	$request = $db->query('SELECT * FROM evenements ORDER BY id DESC;');
+	$data = $request->fetch();
+	$id_event = $data["id"];
+	
+	$id = addPost($desc,$_SESSION["id"],'0',$id_event	);
+
 	$request = $db->prepare('SELECT * FROM membre,pictures WHERE membre.image_profil = pictures.id AND membre.id = :id');
 	$request->execute(array('id'=>$_SESSION["id"]));
 	$data = $request->fetch();
@@ -25,7 +30,9 @@
 						<td class="user_name"><strong>'.$_SESSION["login"].'</strong></td>
 					</tr>	
 					<tr>
-						<td>'.$desc.'</td>
+						<td>
+							<div class="evenement_post"><strong>'.$nom.'</strong><br/><i>'.$desc.'</i><br/>'.$lieu.'</div>
+						</td>
 					</tr>
 					<tr>
 					</tr>
