@@ -17,22 +17,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 		<link rel="stylesheet" href="/inTouch/jquery-ui-1.10.2.custom/development-bundle/themes/custom-theme/jquery.ui.all.css" />
-	
+
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="/inTouch/jquery-1.9.1.min.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.core.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.widget.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.mouse.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.tabs.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.button.js"></script>
+		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.datepicker.js"></script>
 
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
 		
 		<script type="text/javascript">
 		<!--
-		
-		function print_comments(){
-			
-		}
 		
 		function nl2br (str, is_xhtml) {
 		  // http://kevin.vanzonneveld.net
@@ -76,9 +73,43 @@
 							if(event.keyCode == 13){
 									 nouveauCommentaire(this);
 							}
-						});
+						});						
+						$(".button_like").button({icons:{primary:"ui-icon-star"},text:true});
 					}
 				});
+			}
+		}
+		
+		function nouvelEvenement(){
+			var nomEvenement = $("#nomEvenement").val();
+			var descriptionEvenement = $("#descriptionEvenement").val();
+			var dateEvenement = $("#datepicker").val();
+			var lieuEvenement = $("#adr").val();
+			var latitudeLongitude = $("#latlng").val();
+			if(nomEvenement != "" && dateEvenement != "" && lieuEvenement != "" && latitudeLongitude != ""){
+				var data = { nom : nomEvenement, desc : descriptionEvenement, date : dateEvenement, lieu : lieuEvenement, ll : latitudeLongitude};
+				$.ajax({
+					url : "nouvel_evenement.php",
+					data : data,
+					complete : function(xhr, result){
+						if(result != "success") return; 
+						var response = xhr.responseText;
+						$("#nomEvenement").val("");
+						$("#descriptionEvenement").val("");
+						$("#datepicker").val("");
+						$("#adr").val("");
+						$("#latlng").val("48.3906042,-4.4869013");
+						$(response).hide().prependTo("#mes_publications").slideDown(1000);
+						$(".comment_post").val("");
+						$(".comment_post").unbind('keydown');
+						$(".comment_post").bind('keydown',function(event){
+							if(event.keyCode == 13){
+									 nouveauCommentaire(this);
+							}
+						});						
+						$(".button_like").button({icons:{primary:"ui-icon-star"},text:true});
+					}
+				});			
 			}
 		}	
 		
@@ -96,10 +127,10 @@
 						var parent = $(obj).parents("#comment_input");
 						$("<tr class='comments'></tr>").html(response).insertBefore(parent);
 						$(".comment_post").val("");
-						
+						$(".button_like").button({icons:{primary:"ui-icon-star"},text:true});		
 					}
 				  });
-			}
+			}						
 		}
 		
 		function ouvrirCommentaire(obj){
@@ -154,7 +185,89 @@
 				}
 			  }); 
 		  }
+
+
+		  /* Déclaration des variables  */
+		  var geocoder;
+		  var map;
+		  var infowindow = new google.maps.InfoWindow();
+		  var marker;
+	
+		  /* Fonction d'initialisation de la map appelée au chargement de la page  */
+		  function initialize(obj) {
+		  	   geocoder = new google.maps.Geocoder();
+			   var latlng = new google.maps.LatLng(46.227638, 2.213749);
+			   var myOptions = {
+			       zoom: 4,
+			       center: latlng,
+			       mapTypeId: google.maps.MapTypeId.ROADMAP
+			   }
+			   map = new google.maps.Map(document.getElementById(obj), myOptions);
+		  }
+
 		
+		
+		  /* Fonction chargée de géocoder l'adresse  */
+		  function codeAddress() {
+		  	   var address = document.getElementById("adr").value;
+			   geocoder.geocode( { 'address': address + ' France'}, function(results, status) {
+			   	if (status == google.maps.GeocoderStatus.OK) {
+				   var coords = results[0].geometry.location;
+				   map.setCenter(coords);
+				   var marker = new google.maps.Marker({
+					map: map,
+					position: coords
+				   });
+				   document.getElementById('latlng').value = coords.lat()+','+coords.lng();
+				   codeLatLng(coords.lat()+','+coords.lng());
+				} 
+				else {
+				     alert("Le geocodage n\'a pu etre effectue pour la raison suivante: " + status);
+				}
+			    });
+		   }
+
+
+		   /* Fonction de géocodage inversé (en fonction des coordonnées de l'adresse)  */
+		   function codeLatLng(input) {
+		   	    var latlngStr = input.split(",",2);
+			    var lat = parseFloat(latlngStr[0]);
+			    var lng = parseFloat(latlngStr[1]);
+			    var latlng = new google.maps.LatLng(lat, lng);
+			    geocoder.geocode({'latLng': latlng}, function(results, status) {
+			    	if (status == google.maps.GeocoderStatus.OK) {
+				   if (results[0]) {
+					map.setZoom(11);
+					marker = new google.maps.Marker({
+					       position: latlng,
+					       map: map
+					});
+					var elt = results[0].address_components;
+					for(i in elt){
+					      if(elt[i].types[0] == 'postal_code')
+					      	document.getElementById('cp').value = elt[i].long_name;
+					      if(elt[i].types[0] == 'locality')
+					      	document.getElementById('adr').value = elt[i].long_name;
+					      if(elt[i].types[0] == 'administrative_area_level_2')
+					      	document.getElementById('dpt').value = elt[i].long_name;
+					      if(elt[i].types[0] == 'country')
+					      	document.getElementById('pays').value = elt[i].long_name;
+					}
+					infowindow.setContent(results[0].formatted_address);
+					infowindow.open(map, marker);
+					map.setCenter(latlng);
+				    }
+			        } 
+				else {
+				     alert("Geocoder failed due to: " + status);
+				}
+			    });
+			}
+
+			function retrieve(){
+				 var input = document.getElementById("latlng").value;
+				 codeLatLng(input);
+			}			
 		//-->
 		</script>
 		
@@ -169,8 +282,10 @@
 		<!--
 		
 			$(document).ready(function(){
-				$("#tabs").tabs();				
+				$("#tabs").tabs();	
+				$("title").html("inTouch | <?php echo $_SESSION["login"]; ?>");	
 				check_notifications();
+				$("#datepicker").datepicker();
 				$(".button_friends").button({icons:{primary:"ui-icon-person"},text:true});
 				$(".button_posts").button({icons:{primary:"ui-icon-document-b"},text:true});
 				$(".button_comments").button({icons:{primary:"ui-icon-comment"},text:true});
@@ -195,7 +310,7 @@
 					}
 				});
 				setInterval(function(){
-							check_notifications();							
+											check_notifications();							
 							},1000);
 				<?php
 					foreach($_SESSION["chats"] as $login => $id){
@@ -233,10 +348,10 @@
 								<ul>
 									<li><a href="#tab1"><strong>Status</strong></a></li>
 									<li><a href="#tab2"><strong>Photo</strong></a></li>
-									<li><a href="#tab3"><strong>Ev&#232;nement</strong></a></li>
+									<?php if($_GET["id"] == $_SESSION["id"]) echo '<li onclick="javascript:initialize(\'positionCarte\')"><a href="#tab3"><strong>Ev&#232;nement</strong></a></li>'; ?>
 								</ul>
 								<div id="tab1">
-									<table id="post_border" >
+									<table class="post_border" >
 										<tr>
 											<td>
 												<textarea id="publication" cols="65" rows="4" maxlength="255" placeholder="Exprimez-vous">
@@ -252,7 +367,7 @@
 									</table>
 								</div>
 								<div id="tab2">
-									<table id="post_border">
+									<table class="post_border">
 										<tr>
 											<td>
 												<form enctype="multipart/form-data" method="post" action="upload_picture.php" id="picture_post" >
@@ -270,9 +385,47 @@
 										</tr>
 									</table>
 								</div>
-								<div id="tab3">
-
-								</div>
+								<?php if($_GET["id"] == $_SESSION["id"]) echo '<div id="tab3">
+								     <table id="evenement">
+									<tr>
+										<td id="geolocalisation">
+										    <input id="latlng" type="hidden" value="48.3906042,-4.4869013">
+										    <table> 
+										    <tr>
+										    <td>Nom de l\'evenement :</td>
+										    <td><input id="nomEvenement" type="text" size="40"></td>
+										    </td>
+										    </tr> 
+										    <tr>
+										    <td>Description de l\'evenement :</td>
+										    <td><input id="descriptionEvenement" type="text" size="40"></td>
+										    </td>
+										    </tr>
+										    <tr>
+										    <td>Date :</td>
+										    <td><input type="text" id="datepicker" /></td>
+										    </td>
+										    </tr>
+										    <tr>
+										    <td>Lieu :</td>
+										    <td><input id="adr" type="text" size="40"></td>
+										    <td><input type="button" value="Voir" onclick="codeAddress()"></td>
+										    </tr>    
+										    </table>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div id="positionCarte"></div>
+										</td>
+									</tr>
+<tr>
+											<td id="submit_post">
+												<input type="button" value="Publier" onclick="javascript:nouvelEvenement();"/>
+											</td>
+										</tr>
+								      </table>
+								</div>'; ?>
 							</div>
 						</div>
 

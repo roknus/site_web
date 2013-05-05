@@ -4,9 +4,9 @@
 	require_once('add_post.php');
 	date_default_timezone_set('Europe/Berlin');
 	
-	$post = $_GET["post"];
-	$post = nl2br($post);
-	$wall = $_GET["wall"];
+	$nom = $_GET["nom"];
+	$desc = $_GET["desc"];
+	$lieu = $_GET["lieu"]
 	$id = addPost($post,$wall,'1');
 	$db = connect_db();
 	$request = $db->prepare('SELECT * FROM membre,pictures WHERE membre.image_profil = pictures.id AND membre.id = :id');

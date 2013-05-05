@@ -9,7 +9,7 @@
     <style type="text/css">
 		html {height: 100%;}
 		body {height: 100%; margin:0px; padding:0px} 
-		#positionCarte {height: 100%;}
+		#positionCarte {height: 100%;margin-left:100px;}
 		#main{width:400px; padding:30px; margin:auto; background-color:#EEE;}
 		ul{list-style-type:none;}
 		h1{margin-top:0;}

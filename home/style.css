@@ -295,8 +295,8 @@ body{
 
 #mur{
     padding-top:17px;
-	width: 600px;
-	border-left: solid 1px rgb(200,200,200);
+    width: 600px;
+    border-left: solid 1px rgb(200,200,200);
 }
 
 #mes_publications{
@@ -312,7 +312,7 @@ body{
 	border-radius: 2px;
 }
 
-#post_border{
+.post_border{
 	width: 600px;
 	height: 130px;
 	border: solid 1px rgb(200,200,200);
@@ -323,6 +323,7 @@ body{
 #submit_post{
 	background-color: rgb(240,240,255);
 	height: 28px;
+	font-size:12px;
 }
 #tabs, #tabs div{
 	margin-bottom: 10px;
@@ -606,6 +607,16 @@ textarea{
 }
 
 #positionCarte{
-    width:500px;
-    height:500px;
+    height:200px;
+}
+
+#geolocalisation{
+    width:250px;
+    padding-left:60px;
+}
+
+#evenement{
+    font-size: 12px;
+    border:1px solid rgb(200,200,200);
+    width:604px;
 }

@@ -4,24 +4,20 @@
 	require_once('add_post.php');
 	date_default_timezone_set('Europe/Berlin');
 	
-	$post = $_GET["post"];
-	$post = nl2br($post);
-	$wall = $_GET["wall"];
-	$id = addPost($post,$wall,'1');
+	$nom = $_GET["nom"];
+	$desc = $_GET["desc"];
+	$lieu = $_GET["lieu"];
+	$ll = $_GET["ll"];
+	$date = $_GET["date"];
+
+	$id = addPost($desc,$_SESSION["id"],'1');
+
 	$db = connect_db();
 	$request = $db->prepare('SELECT * FROM membre,pictures WHERE membre.image_profil = pictures.id AND membre.id = :id');
 	$request->execute(array('id'=>$_SESSION["id"]));
-	$notif = $post;
-	if(strlen($notif) > 50){
-		$notif = substr($notif,0,50);
-		$notif .= "...";
-	}
-	if($_SESSION["id"] != $wall){
-	   $db->query('INSERT INTO notifications (type,id_profile,id_poster,content,checked,ancre) VALUES ("2","'.$wall.'","'.$_SESSION["id"].'","'.$notif.'","0","?id='.$wall.'#'.$id.'");');
-	}
 	$data = $request->fetch();
 	echo '<div id="'.$id.'" class="post">
-<table>
+	     <table>
 					<tr>
 						<td rowspan="4" class="post_user_picture">	
 							<img src="img/'.$data["image_profil"].'.'.$data["type"].'" height="45" width="45"/>
@@ -29,7 +25,7 @@
 						<td class="user_name"><strong>'.$_SESSION["login"].'</strong></td>
 					</tr>	
 					<tr>
-						<td>'.$post.'</td>
+						<td>'.$desc.'</td>
 					</tr>
 					<tr>
 					</tr>

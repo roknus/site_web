@@ -7,7 +7,7 @@
 	
 	$comment = $_GET["comment"];
         $id_post = $_GET["id_post"];
-        addComment($id_post,$comment);
+        $id = addComment($id_post,$comment);
 	$db = connect_db();
 	$request = $db->query('SELECT *,posts.id AS postsID FROM posts,comments WHERE comments.id_post = posts.id AND posts.id = '.$id_post.' GROUP BY id_poster;');
 	$data = $request->fetch();
@@ -29,6 +29,8 @@
 	}while($data = $request->fetch());
 
         echo'<td class="post_user_picture"><img src="img/'.get_profile_pic_path($_SESSION["id"]).'" height="30" width="30" /></td>
-		 <td><span class="user_name"><strong>'.$_SESSION["login"].'</strong></span> '.$comment.'
+		<td><span class="user_name"><strong>'.$_SESSION["login"].'</strong></span> '.$comment.'
 		<br/><span class="post_time">il y a un instant</span>
+		-
+		<button class="button_like" onclick="like('.$id.',this)">0</button>
 		</td>';
