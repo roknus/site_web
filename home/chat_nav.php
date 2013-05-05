@@ -40,6 +40,7 @@
 		 if($(obj).prev().css("display") == "none"){
 		 	clearInterval(interval);
 		 	$(obj).prev().show();
+			$(obj).css("background-color","#396bc6");
 			$(obj).css("top","-347px");
 			$(obj).parent().find(".chat_input").bind('keydown',function(event){
 				if(event.keyCode == 13){
@@ -59,7 +60,7 @@
 						if(response != ""){					
 							    $(obj).parent().find('.friend_chat_content').append(response);
 							    var scroll = $(obj).parent().find(".friend_chat_content").scrollTop();
-							    $(obj).parent().find(".friend_chat_content").scrollTop(scroll +100);
+							    $(obj).parent().find(".friend_chat_content").scrollTop(scroll +10000);
 						}	
 					}
 			  	});	 
@@ -166,6 +167,13 @@
 								if(!isChat(res[i+1])){
 									start_chat(res[i],res[i+1]);
 									chats.push(res[i+1]);
+								}
+								else{
+									$(".chat_input").each(function(j){
+										if($(this).attr("name") == res[i] && ($(this).parent().parent().find(".friend_chat_block").css("display") == "none")){
+											$(this).parent().parent().find(".friend_chat").css("background-color","#c84600");
+										}
+									});
 								}
 						    		i = i+2;
 						    }

@@ -252,6 +252,8 @@ body{
 
 .friend_chat_block textarea{
     width:220px;
+    font-family: Helvetica;
+    font-size:12px;
 }
 
 .friend_chat_title{
@@ -342,6 +344,10 @@ textarea{
 .post{
 	border-top: 1px solid rgb(200,200,200);
 	max-width: 650px;
+}
+
+.post img{
+    max-width: 500px;
 }
 
 .post td > img{
@@ -599,3 +605,7 @@ textarea{
 	padding: 3px;
 }
 
+#positionCarte{
+    width:500px;
+    height:500px;
+}

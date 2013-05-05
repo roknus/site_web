@@ -24,6 +24,8 @@
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.mouse.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.tabs.js"></script>
 		<script src="/inTouch/jquery-ui-1.10.2.custom/development-bundle/ui/jquery.ui.button.js"></script>
+
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
 		
 		<script type="text/javascript">
 		<!--
@@ -151,7 +153,7 @@
 					$(obj).find("span").html(response);			
 				}
 			  }); 
-		}
+		  }
 		
 		//-->
 		</script>
@@ -167,7 +169,7 @@
 		<!--
 		
 			$(document).ready(function(){
-				$("#tabs").tabs();
+				$("#tabs").tabs();				
 				check_notifications();
 				$(".button_friends").button({icons:{primary:"ui-icon-person"},text:true});
 				$(".button_posts").button({icons:{primary:"ui-icon-document-b"},text:true});
@@ -213,6 +215,7 @@
 					<?php include_once('profile_block.php'); ?>
 					<br/>
 					<?php
+						echo '<span style="margin-left:10px;">';
 						if($_SESSION["id"] != $_GET["id"]){
 								   $db = connect_db();
 								   $request = $db->query('SELECT * FROM amis WHERE id1 = '.$_GET["id"].' AND id2 = '.$_SESSION["id"].';');
@@ -221,6 +224,7 @@
 								   }					   
 						}
 						echo '<input type="button" value="Photos" onclick="javascript:$(location).attr(\'href\',\'./photo.php?id='.$_GET["id"].'\')" />';	
+						echo '</span>';
 					?>
 					</td>
 					<td rowspan="3" id="mur"> 
@@ -253,7 +257,6 @@
 											<td>
 												<form enctype="multipart/form-data" method="post" action="upload_picture.php" id="picture_post" >
 													<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
-													<input type="hidden" name="wall" value="<?php echo $_GET["id"]; ?>" />
 		                                                                                        <input class="picture_description" name="picture_title_input" type="text" size="65" value="Titre" onfocus="javascript:if(this.value=='Titre')this.value='';" onblur="javascript:if(this.value=='')this.value='Titre';" />
 		                                                                                        <textarea class="picture_description" name="picture_description" cols="65" rows="2" maxlength="255" placeholder="Description"></textarea>
 													<input id="img_input_title" name="uploaded_picture" type="file" size="40"/> (2Mo max.)
@@ -267,7 +270,9 @@
 										</tr>
 									</table>
 								</div>
-								<div id="tab3">onglet 3</div>
+								<div id="tab3">
+
+								</div>
 							</div>
 						</div>
 

@@ -67,7 +67,7 @@
 				$request = $db->query('SELECT * FROM pictures WHERE id_owner = '.$_GET["id"].';');
 				while($data = $request->fetch()){
 					    echo '<img src="img/'.$data["id"].'.'.$data["type"].'" style="max-width:200px;max-height:200px;" />';
-				}echo '1';
+				}
 			    ?>				         
             		</td>     	
 	 	</tr>

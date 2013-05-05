@@ -128,7 +128,7 @@
 	<li>
 		<table id="notifications">
 			<tr>
-				<td id="friend_notifications" title="Demandes d'ajouts" alt="aaaa"><button class="button_friends" onclick="javascript:notifications_amis();"><span></span></button></td>
+				<td id="friend_notifications" title="Demandes d'ajouts"><button class="button_friends" onclick="javascript:notifications_amis();"><span></span></button></td>
 				<td id="post_notifications" title="Publications"><button class="button_posts" onclick="javascript:notifications_posts();"><span></span></button></td>
 				<td id="comment_notifications" title="Commentaires"><button class="button_comments" onclick="javascript:notifications_comments();"><span></span></button></td>
 			</tr>

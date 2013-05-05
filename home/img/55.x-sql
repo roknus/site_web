@@ -1,0 +1,242 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Apr 26, 2013 at 06:42 AM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.4.3
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `geekbook`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `amis`
+--
+
+CREATE TABLE IF NOT EXISTS `amis` (
+  `id1` int(11) NOT NULL,
+  `id2` int(11) NOT NULL,
+  PRIMARY KEY (`id1`,`id2`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_post` int(11) NOT NULL,
+  `id_poster` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `creation_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_post` (`id_post`),
+  KEY `id_poster` (`id_poster`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `id_post`, `id_poster`, `content`, `creation_time`) VALUES
+(1, 43, 1, 'Salut !', '2013-04-03 00:00:00'),
+(2, 43, 1, 'GG !', '2013-04-03 00:00:00'),
+(3, 40, 1, 'tyjtyjtyj', '2013-04-03 00:00:00'),
+(4, 42, 1, 'hjjy', '2013-04-03 00:00:00'),
+(5, 42, 1, 'tyjtyj', '2013-04-03 00:00:00'),
+(6, 42, 1, 'tyjtj', '2013-04-03 00:00:00'),
+(7, 42, 1, 'tyjtyjtyj', '2013-04-03 00:00:00'),
+(8, 42, 1, 'tyjtjtyjt', '2013-04-03 00:00:00'),
+(9, 43, 1, 'ergerg', '2013-04-03 00:00:00'),
+(10, 43, 1, 'rgrgrg', '2013-04-03 00:00:00'),
+(11, 41, 1, 'rtertert', '2013-04-03 00:00:00'),
+(12, 40, 1, 'efzef', '2013-04-03 00:00:00'),
+(13, 43, 1, 'zezer', '2013-04-03 00:00:00'),
+(14, 43, 1, 'gg', '2013-04-03 00:00:00'),
+(15, 42, 1, 'rr', '2013-04-03 00:00:00'),
+(16, 43, 1, 'ggg', '2013-04-03 00:00:00'),
+(17, 42, 1, 'ggg', '2013-04-03 00:00:00'),
+(18, 43, 1, 'dfbdfb', '2013-04-03 00:00:00'),
+(19, 43, 1, 'rv', '2013-04-03 00:00:00'),
+(20, 42, 1, 'bb', '2013-04-03 00:00:00'),
+(21, 40, 1, 'rvrv', '2013-04-03 00:00:00'),
+(22, 40, 1, 'rrr', '2013-04-03 00:00:00'),
+(23, 38, 1, 'feff', '2013-04-03 00:00:00'),
+(24, 43, 1, 'trh th q,r grgo jrg ozjrg ozjp g poghreoighoeih gerig Ãªrogherog^herpg', '2013-04-03 00:00:00'),
+(25, 44, 1, 'rrrrr', '2013-04-03 00:00:00'),
+(26, 45, 1, 'rtbrtb', '2013-04-03 00:00:00'),
+(27, 45, 1, 'ggggg', '2013-04-03 00:00:00'),
+(28, 45, 1, 'rgrg', '2013-04-03 00:00:00'),
+(29, 43, 1, 'efef', '2013-04-03 00:00:00'),
+(31, 55, 1, 'eeee', '2013-04-05 05:34:04'),
+(32, 56, 1, 'ggg', '2013-04-07 21:43:59'),
+(33, 57, 1, 't', '2013-04-07 21:44:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `membre`
+--
+
+CREATE TABLE IF NOT EXISTS `membre` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `dob` date NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `membre`
+--
+
+INSERT INTO `membre` (`id`, `username`, `password`, `email`, `dob`, `gender`, `lname`, `fname`) VALUES
+(1, 'Roknus', 'aaaa', '', '0000-00-00', '', 'aaa', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pictures`
+--
+
+CREATE TABLE IF NOT EXISTS `pictures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_owner` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_owner` (`id_owner`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `pictures`
+--
+
+INSERT INTO `pictures` (`id`, `id_owner`, `name`, `type`, `title`) VALUES
+(1, 1, 'PA.jpg', 'jpeg', 'title'),
+(2, 1, 'PA.jpg', 'jpeg', 'title'),
+(3, 1, 'PA.jpg', 'jpeg', 'title'),
+(4, 1, '2500px-Svg-cards-2.0.svg.png', 'png', 'title'),
+(5, 1, '2500px-Svg-cards-2.0.svg.png', 'png', 'title'),
+(6, 1, '2500px-Svg-cards-2.0.svg.png', 'png', 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_owner` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `picture` int(11) NOT NULL DEFAULT '1',
+  `creation_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `image` (`picture`),
+  KEY `id_owner` (`id_owner`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `id_owner`, `content`, `picture`, `creation_time`) VALUES
+(7, 1, 'aaaaaa', 1, '2013-03-31 18:57:11'),
+(9, 1, 'desc', 3, '2013-03-31 17:07:53'),
+(10, 1, 'fff', 1, '2013-03-31 19:14:12'),
+(11, 1, 'desc', 4, '2013-03-31 17:14:22'),
+(12, 1, 'test<br />\n', 1, '2013-03-31 19:14:51'),
+(13, 1, 'desc', 5, '2013-03-31 19:14:56'),
+(14, 1, 'salut<br />\n', 1, '2013-03-31 19:38:48'),
+(15, 1, 'Salut<br />\n', 1, '2013-04-01 15:45:20'),
+(16, 1, 'ahhaa', 1, '2013-04-01 15:48:15'),
+(17, 1, 'rr', 1, '2013-04-01 15:58:06'),
+(18, 1, 'ggg', 1, '2013-04-01 15:58:15'),
+(19, 1, 'tt', 1, '2013-04-01 15:58:32'),
+(20, 1, 'tt', 1, '2013-04-01 15:59:39'),
+(21, 1, 'rrr', 1, '2013-04-01 16:01:10'),
+(22, 1, 'rr', 1, '2013-04-01 16:01:27'),
+(23, 1, 'rrrrrr', 1, '2013-04-01 16:02:01'),
+(24, 1, 'rr', 1, '2013-04-01 16:02:34'),
+(25, 1, 'gggg', 1, '2013-04-01 16:02:56'),
+(26, 1, 'rrr', 1, '2013-04-01 16:03:20'),
+(27, 1, 'nnn', 1, '2013-04-01 16:03:37'),
+(28, 1, 'lol<br />\n', 1, '2013-04-01 16:04:26'),
+(29, 1, 'eeee', 1, '2013-04-01 16:05:40'),
+(30, 1, '<div style="background-color:black"></div>', 1, '2013-04-01 16:40:14'),
+(31, 1, 'eee', 1, '2013-04-01 16:41:21'),
+(32, 1, '&lt;br /&gt;\n&lt;br /&gt;\n', 1, '2013-04-01 17:09:19'),
+(33, 1, 'e e e e e e e e   e e  e e e e e e e e e e e e e e e e e e e e e e e  e e e e e ee ee&lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\nee e e e e e e e e e e e e e e e e  e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e &lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\neeeeeeeeee', 1, '2013-04-01 17:09:57'),
+(34, 1, '&lt;br /&gt;\n&lt;br /&gt;\n', 1, '2013-04-01 17:10:41'),
+(35, 1, '<br />\n<br />\n', 1, '2013-04-01 17:10:52'),
+(36, 1, 'dddd', 1, '2013-04-01 17:10:55'),
+(37, 1, 'yyhh', 1, '2013-04-01 17:12:56'),
+(38, 1, '<br />\ne', 1, '2013-04-01 17:14:07'),
+(39, 1, 'yjh', 1, '2013-04-01 17:41:21'),
+(40, 1, 'rrr', 1, '2013-04-01 17:54:25'),
+(41, 1, 'g', 1, '2013-04-01 17:55:03'),
+(42, 1, 'g', 1, '2013-04-01 17:55:56'),
+(43, 1, 'hh', 1, '2013-04-01 18:24:21'),
+(44, 1, 'test\r\n', 6, '2013-04-03 21:40:52'),
+(45, 1, 'ahahaha<br />\n', 1, '2013-04-03 21:42:57'),
+(46, 1, 'tyjtyjtyj', 1, '2013-04-03 21:49:46'),
+(47, 1, 'rgergerg', 1, '2013-04-03 21:51:06'),
+(48, 1, 'ergerg', 1, '2013-04-03 21:51:26'),
+(49, 1, 'ffdfg<br />\n', 1, '2013-04-03 21:53:34'),
+(50, 1, 'rgrgrg', 1, '2013-04-03 21:54:26'),
+(51, 1, 'rgr', 1, '2013-04-03 21:55:08'),
+(52, 1, 'rr<br />\n', 1, '2013-04-03 21:55:34'),
+(53, 1, 't', 1, '2013-04-03 21:56:20'),
+(54, 1, 'r', 1, '2013-04-03 21:58:25'),
+(55, 1, 'e', 1, '2013-04-03 22:00:06'),
+(56, 1, 'eee', 1, '2013-04-05 05:34:08'),
+(57, 1, 'ff', 1, '2013-04-07 21:43:49');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`id_poster`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pictures`
+--
+ALTER TABLE `pictures`
+  ADD CONSTRAINT `pictures_ibfk_1` FOREIGN KEY (`id_owner`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`picture`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `posts_ibfk_3` FOREIGN KEY (`id_owner`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
