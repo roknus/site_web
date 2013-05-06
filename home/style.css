@@ -622,10 +622,11 @@ textarea{
 }
 
 .evenement_post{
+    padding:10px;
     background-color:rgb(230,230,255);
 }
 
 .geo_event{
-    width: 400px;
-    height: 200px;
+    width: 500px;
+    height: 300px;
 }

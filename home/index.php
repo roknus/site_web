@@ -203,6 +203,7 @@
 			       mapTypeId: google.maps.MapTypeId.ROADMAP
 			   }
 			   map = new google.maps.Map(document.getElementById(obj), myOptions);
+			   return map;
 		  }
 
 		
@@ -219,7 +220,7 @@
 					position: coords
 				   });
 				   document.getElementById('latlng').value = coords.lat()+','+coords.lng();
-				   codeLatLng(coords.lat()+','+coords.lng());
+				   codeLatLng(coords.lat()+','+coords.lng(),map);
 				} 
 				else {
 				     alert("Le geocodage n\'a pu etre effectue pour la raison suivante: " + status);
@@ -229,7 +230,7 @@
 
 
 		   /* Fonction de géocodage inversé (en fonction des coordonnées de l'adresse)  */
-		   function codeLatLng(input) {
+		   function codeLatLng(input,map) {
 		   	    var latlngStr = input.split(",",2);
 			    var lat = parseFloat(latlngStr[0]);
 			    var lng = parseFloat(latlngStr[1]);
@@ -237,22 +238,11 @@
 			    geocoder.geocode({'latLng': latlng}, function(results, status) {
 			    	if (status == google.maps.GeocoderStatus.OK) {
 				   if (results[0]) {
-					map.setZoom(11);
+				      	map.setZoom(8);
 					marker = new google.maps.Marker({
 					       position: latlng,
 					       map: map
 					});
-					var elt = results[0].address_components;
-					for(i in elt){
-					      if(elt[i].types[0] == 'postal_code')
-					      	document.getElementById('cp').value = elt[i].long_name;
-					      if(elt[i].types[0] == 'locality')
-					      	document.getElementById('adr').value = elt[i].long_name;
-					      if(elt[i].types[0] == 'administrative_area_level_2')
-					      	document.getElementById('dpt').value = elt[i].long_name;
-					      if(elt[i].types[0] == 'country')
-					      	document.getElementById('pays').value = elt[i].long_name;
-					}
 					infowindow.setContent(results[0].formatted_address);
 					infowindow.open(map, marker);
 					map.setCenter(latlng);

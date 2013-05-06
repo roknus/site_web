@@ -35,7 +35,7 @@
 						
 							echo '<td><div class="evenement_post"><strong>'.$data2["nom"].'</strong><br/><i>'.$data2["description"].'</i><br/>à '.$data2["lieu"].' le '.$data2["date"].'</div>
 							     
-							<div class="geo_event" id="geo_event'.$data2["id"].'"><script>initialize("geo_event'.$data2["id"].'");codeLatLng("'.$data["ll"].'");</script></div>
+							<div class="geo_event" id="geo_event'.$data2["id"].'"><script>ma_map = initialize("geo_event'.$data2["id"].'");codeLatLng("'.$data2["ll"].'",ma_map);</script></div>
 							</td>';						
 						}
 						else{

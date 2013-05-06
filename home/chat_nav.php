@@ -42,7 +42,7 @@
 		 	$(obj).prev().show();
 			$(obj).css("background-color","#396bc6");
 			$(obj).css("top","-347px");
-			$(obj).parent().find(".chat_input").bind('keydown',function(event){
+			$(obj).parent().find(".chat_input").bind('keyup',function(event){
 				if(event.keyCode == 13){
 					nouveauMessage(this);
 				}
@@ -61,7 +61,7 @@
 							 if(response != ""){					
 							 	     $(obj).parent().find('.friend_chat_content').append(response);
 							    	     var scroll = $(obj).parent().find(".friend_chat_content").scrollTop();
-							    	     $(obj).parent().find(".friend_chat_content").scrollTop(scroll +10000);
+							    	     $(obj).parent().find(".friend_chat_content").scrollTop(scroll +9999);
 							 }	
 						}
 			  		});	 
@@ -72,7 +72,7 @@
 			$(obj).prev().hide();
 			$(obj).parent().find('.friend_chat_content').empty();
 			$(obj).css("top","-25px");
-			$(obj).parent().find(".chat_input").unbind('keydown');
+			$(obj).parent().find(".chat_input").unbind('keyup');
 			clearInterval(interval);
 		 }
 	}
